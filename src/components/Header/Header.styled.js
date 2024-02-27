@@ -50,7 +50,7 @@ export const ModalMenuContainer = styled.div`
   justify-content: center;
   background-color: #ffffff;
   padding: 20px;
-  z-index: 1000;
+  z-index: 10000;
   animation: ${slideInAnimation} 0.3s ease-in-out;
 `;
 export const HeaderIconClose = styled.a`
