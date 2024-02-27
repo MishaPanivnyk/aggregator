@@ -1,16 +1,23 @@
+import { Routes, Route } from 'react-router-dom';
+import { GlobalStyle } from './GlobalStyle';
+import SharedLayout from 'components/SharedLayout/SharedLayout';
+import MainPage from 'pages/MainPage/MainPage';
+import Blogs from 'pages/Blogs/Blogs';
+import Blog from 'pages/Blog/Blog';
+import { ToastContainer } from 'react-toastify';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <GlobalStyle />
+      <SharedLayout>
+        <Routes>
+          <Route exact path="/" element={<MainPage />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blog/:id" element={<Blog />} />
+        </Routes>
+      </SharedLayout>
+      <ToastContainer />
+    </>
   );
 };
