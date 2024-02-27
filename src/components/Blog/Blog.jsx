@@ -66,6 +66,7 @@ export const Blog = () => {
 
   const handleDelete = async id => {
     setIsDeleting(true);
+    console.log(isDeleting);
     try {
       await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/blogs/${id}`);
 
