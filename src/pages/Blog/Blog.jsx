@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import { Container } from 'components/Container/Container';
 const Blog = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
@@ -34,8 +35,10 @@ const Blog = () => {
 
   return (
     <main>
-      <h1>{blog.title}</h1>
-      <p>{blog.content}</p>
+      <Container>
+        <h1>{blog.title}</h1>
+        <p>{blog.content}</p>
+      </Container>
     </main>
   );
 };
