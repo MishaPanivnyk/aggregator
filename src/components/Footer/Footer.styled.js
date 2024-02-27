@@ -27,6 +27,7 @@ export const SocList = styled.ul`
   }
 `;
 export const SocItem = styled.li`
+  cursor: pointer;
   @media only screen and (min-width: 768px) {
   }
 `;
