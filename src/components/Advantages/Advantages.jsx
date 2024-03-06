@@ -8,6 +8,9 @@ import {
   AdvantagesItemTitle,
   AdvantagesItemDescription,
   AdvantagesIconContainer,
+  AdvantagesUkdContainer,
+  AdvantagesUkdLink,
+  AdvantagesUkdImg,
 } from './Advantages.styled';
 import sprite from 'img/sprite.svg';
 
@@ -25,6 +28,17 @@ export const Advantages = () => {
   return (
     <AdvantagesContainer>
       <Container>
+        <AdvantagesUkdContainer>
+          <AdvantagesUkdLink href="https://ukd.edu.ua/" data-id="672308">
+            <AdvantagesUkdImg
+              class="lazy-loaded"
+              src="https://galka.if.ua/app/uploads/2023/01/halka-ukd-desk.gif?x19487"
+              data-lazy-type="image"
+              data-src="https://galka.if.ua/app/uploads/2023/01/halka-ukd-desk.gif?x19487"
+              alt="УКД Деск"
+            />
+          </AdvantagesUkdLink>
+        </AdvantagesUkdContainer>
         <AdvantagesTitle>Наші переваги</AdvantagesTitle>
         <AdvantagesItemContainer>
           <AdvantagesItem>
