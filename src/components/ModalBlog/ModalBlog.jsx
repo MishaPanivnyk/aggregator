@@ -28,7 +28,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
 
     if (name === 'image' && files[0]) {
       if (files[0].size > 2 * 1024 * 1024) {
-        toast.error('Image size should not exceed 2MB');
+        toast.error('Розмір зображення не повинен перевищувати 2 Мб');
         return;
       }
     }
@@ -43,12 +43,12 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
     e.preventDefault();
 
     if (Object.values(formData).some(val => val === '')) {
-      toast.error('Please fill in all fields');
+      toast.error('Будь ласка, заповніть усі поля!');
       return;
     }
 
     if (formData.image && formData.image.size > 2 * 1024 * 1024) {
-      toast.error('Image size should not exceed 2MB');
+      toast.error('Розмір зображення не повинен перевищувати 2 Мб');
       return;
     }
 
@@ -71,11 +71,11 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
       );
 
       updateBlogs(response.data);
-      toast.success('Blog submitted successfully!');
+      toast.success('Блог успішно надіслано!');
       onClose();
     } catch (error) {
       console.error('Error submitting blog: ', error);
-      toast.error('Error submitting blog. Please try again.');
+      toast.error('Помилка надсилання блогу. Будь ласка спробуйте ще раз!');
     }
   };
 
