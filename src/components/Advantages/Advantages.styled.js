@@ -83,3 +83,29 @@ export const AdvantagesItemDescription = styled.p`
     line-height: 24px;
   }
 `;
+export const AdvantagesUkdContainer = styled.div`
+  margin-bottom: 15px;
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+  }
+`;
+export const AdvantagesUkdLink = styled.a`
+  display: flex;
+  justify-content: center;
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+  }
+`;
+export const AdvantagesUkdImg = styled.img`
+  width: 100%;
+  display: flex;
+  @media only screen and (min-width: 768px) {
+    width: 60%;
+    justify-content: center;
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 700px;
+  }
+`;

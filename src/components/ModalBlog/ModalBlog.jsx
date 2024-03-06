@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import {
   Input,
   Button,
@@ -10,7 +10,7 @@ import {
   CloseButton,
   ModalContent,
   Form,
-  TextArea,
+  // TextArea,
 } from './ModalBlog.styled';
 import sprite from 'img/sprite.svg';
 
@@ -19,78 +19,88 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
     title: '',
     content: '',
     author: '',
-    imageUrl: '',
+    image: null,
     category: '',
   });
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    const { name, value, files } = e.target;
 
-  const isFormValid = () => {
-    return (
-      formData.title.trim() !== '' &&
-      formData.content.trim() !== '' &&
-      formData.author.trim() !== '' &&
-      formData.imageUrl.trim() !== '' &&
-      formData.category.trim() !== ''
-    );
+    if (name === 'image' && files[0]) {
+      if (files[0].size > 2 * 1024 * 1024) {
+        toast.error('Розмір зображення не повинен перевищувати 2 Мб');
+        return;
+      }
+    }
+
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: name === 'image' ? files[0] : value,
+    }));
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!isFormValid()) {
-      toast.error('Помилка при отриманні даних');
 
+    if (Object.values(formData).some(val => val === '')) {
+      toast.error('Будь ласка, заповніть усі поля!');
       return;
     }
+
+    if (formData.image && formData.image.size > 2 * 1024 * 1024) {
+      toast.error('Розмір зображення не повинен перевищувати 2 Мб');
+      return;
+    }
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('content', formData.content);
+    formDataToSend.append('author', formData.author);
+    formDataToSend.append('image', formData.image);
+    formDataToSend.append('category', formData.category);
 
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/blogs`,
-        formData
+        formDataToSend,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
 
       updateBlogs(response.data);
-
-      toast.success('Blog submitted successfully!');
-
+      toast.success('Блог успішно надіслано!');
       onClose();
     } catch (error) {
       console.error('Error submitting blog: ', error);
-      toast.error('Error submitting blog. Please try again.');
+      toast.error('Помилка надсилання блогу. Будь ласка спробуйте ще раз!');
     }
   };
+
   const handleClose = () => {
     onClose();
   };
 
-  const handleEscape = e => {
-    if (e.keyCode === 27) {
-      onClose();
-    }
-  };
-
-  const handleClickOutside = e => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+  const handleEvent = e => {
+    if (e.type === 'keydown' && e.keyCode !== 27) return;
+    if (e.type === 'click' && e.target !== e.currentTarget) return;
+    onClose();
   };
 
   useEffect(() => {
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleEvent);
+    document.addEventListener('click', handleEvent);
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('keydown', handleEvent);
+      document.removeEventListener('click', handleEvent);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Modal onClick={handleClickOutside}>
+    <Modal onClick={handleEvent}>
       <ModalContent>
         <CloseButton onClick={handleClose}>
           <svg width="30px" height="30px">
@@ -105,12 +115,12 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
             onChange={handleChange}
             placeholder="Title"
           />
-          <TextArea
-            name="content"
+          <ReactQuill
+            theme="snow"
+            rows="10"
             value={formData.content}
-            onChange={handleChange}
-            placeholder="Content"
-          ></TextArea>
+            onChange={value => setFormData({ ...formData, content: value })}
+          />
           <Input
             type="text"
             name="author"
@@ -119,11 +129,10 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
             placeholder="Author"
           />
           <Input
-            type="text"
-            name="imageUrl"
-            value={formData.imageUrl}
+            type="file"
+            name="image"
             onChange={handleChange}
-            placeholder="Image URL"
+            placeholder="Image"
           />
           <Input
             type="text"

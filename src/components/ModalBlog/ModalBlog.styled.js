@@ -50,16 +50,16 @@ export const Input = styled.input`
   border-radius: 3px;
 `;
 
-export const TextArea = styled.textarea`
-  margin-bottom: 10px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-`;
+// export const TextArea = styled.textarea`
+//   margin-bottom: 10px;
+//   padding: 5px;
+//   border: 1px solid #ccc;
+//   border-radius: 3px;
+// `;
 
 export const Button = styled.button`
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #01e45c;
   color: #fff;
   border: none;
   border-radius: 3px;

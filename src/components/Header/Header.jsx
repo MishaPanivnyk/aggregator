@@ -27,10 +27,8 @@ export const Header = () => {
 
   useEffect(() => {
     if (openMenu) {
-      // Забираємо скрол при відкритті модального вікна
       document.body.style.overflow = 'hidden';
     } else {
-      // Відновлюємо скрол при закритті модального вікна
       document.body.style.overflow = 'unset';
     }
   }, [openMenu]);
