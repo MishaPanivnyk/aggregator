@@ -51,14 +51,19 @@ export const BlogItem = styled.li`
   background: #fff;
   box-shadow: 0px 4px 26px 0px rgba(203, 203, 203, 0.25);
   padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media only screen and (min-width: 1024px) {
     width: calc(25.33% - 10px);
   }
 `;
 export const BlogItemImg = styled.img`
   width: 100%;
+  height: 100%;
   /* position: relative; */
   margin-bottom: 20px;
+  object-fit: cover;
 `;
 export const BlogItemDesc = styled.p`
   border-radius: 100px;
@@ -70,7 +75,7 @@ export const BlogItemDesc = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding: 6px;
+  padding: 10px;
   position: absolute;
   top: 10px;
   left: 20px;
@@ -132,11 +137,12 @@ export const DeleteIcon = styled.a`
   z-index: 9999;
   right: 10px;
   top: 10px;
+  fill: red;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   &:hover,
   &:focus {
-    fill: red;
+    fill: #01e45c;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 `;

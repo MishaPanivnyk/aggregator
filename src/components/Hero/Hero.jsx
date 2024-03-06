@@ -13,12 +13,12 @@ export const Hero = () => {
     query: '(min-width: 768px) and (max-width: 1023px)',
   });
 
-  let imageUrl = imageHeroDesktop; // По умолчанию для десктопа
+  let imageUrl = imageHeroDesktop;
 
   if (isTablet) {
-    imageUrl = imageHeroTablet; // Для планшета
+    imageUrl = imageHeroTablet;
   } else if (isMobile) {
-    imageUrl = imageHero; // Для мобильных устройств
+    imageUrl = imageHero;
   }
   return (
     <HeroContainer>
