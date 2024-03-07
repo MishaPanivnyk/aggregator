@@ -109,7 +109,7 @@ export const Blog = () => {
                           <BlogItemDate>
                             {formatDate(blog.createdAt)}
                           </BlogItemDate>
-                          <BlogItemBtn to={`/blog/${blog._id}`}>
+                          <BlogItemBtn to={`/blogs/${blog._id}`}>
                             Детальніше
                           </BlogItemBtn>
                         </BlogItemDateContainer>
@@ -129,7 +129,7 @@ export const Blog = () => {
                           <BlogItemDate>
                             {formatDate(blog.createdAt)}
                           </BlogItemDate>
-                          <BlogItemBtn to={`/blog/${blog._id}`}>
+                          <BlogItemBtn to={`/blogs/${blog._id}`}>
                             Детальніше
                           </BlogItemBtn>
                         </BlogItemDateContainer>
