@@ -6,7 +6,7 @@ export const Link = styled(NavLink)`
     width: 60px;
     height: 36px;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    margin-right: 150px;
+    margin-right: 80px;
 
     @media only screen and (min-width: 768px) {
       margin-right: 0px;

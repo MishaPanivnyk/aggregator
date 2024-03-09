@@ -5,10 +5,10 @@ export const Navigation = ({ onClick }) => {
   return (
     <Nav>
       <Link to="/" onClick={onClick}>
-        Університети
+        Головна
       </Link>
-      <Link to="/courser" onClick={onClick}>
-        Курси
+      <Link to="/universities" onClick={onClick}>
+        Університети
       </Link>
       <Link to="/reviews" onClick={onClick}>
         Відгуки

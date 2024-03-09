@@ -59,10 +59,10 @@ export const Header = () => {
                   </svg>
                 </HeaderIconClose>
                 <Link to="/" onClick={toggleMenu}>
-                  Університети
+                  Головна
                 </Link>
-                <Link to="/courser" onClick={toggleMenu}>
-                  Курси
+                <Link to="/universities" onClick={toggleMenu}>
+                  Університети
                 </Link>
                 <Link to="/reviews" onClick={toggleMenu}>
                   Відгуки
