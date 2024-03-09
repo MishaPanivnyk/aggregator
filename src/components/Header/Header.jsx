@@ -15,6 +15,7 @@ import { Search } from './Search/Search';
 import { BurgerMenu } from './BurgerMenu/BurgerMenu';
 import { Link } from './Navigation/Navigation.styled';
 import sprite from 'img/sprite.svg';
+import { Avatar } from './Avatar/Avatar';
 
 export const Header = () => {
   const isDesktop = useMediaQuery({
@@ -45,6 +46,7 @@ export const Header = () => {
             <Logo />
             <NavBox>
               {isDesktop && <Navigation />}
+              <Avatar />
               <Comparison />
               <Search />
               {isMobile && <BurgerMenu onClick={toggleMenu} />}
