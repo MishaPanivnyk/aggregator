@@ -14,7 +14,6 @@ export const Loader = () => {
         display: 'flex',
         justifyContent: 'center',
       }}
-      wrapperClassName=""
       visible={true}
     />
   );
