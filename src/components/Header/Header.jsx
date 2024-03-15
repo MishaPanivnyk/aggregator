@@ -44,8 +44,8 @@ export const Header = () => {
         <Container>
           <Section>
             <Logo />
+            {isDesktop && <Navigation />}
             <NavBox>
-              {isDesktop && <Navigation />}
               <Avatar />
               <Comparison />
               <Search />

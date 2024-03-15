@@ -9,10 +9,11 @@ export const Section = styled.div`
   display: flex;
   align-items: center;
   gap: 21px;
-  justify-content: space-around;
+  justify-content: space-between;
   @media only screen and (min-width: 768px) {
     padding-top: 30px;
     padding-bottom: 20px;
+    justify-content: space-evenly;
   }
   @media only screen and (min-width: 1024px) {
     padding-top: 26px;
@@ -23,7 +24,6 @@ export const NavBox = styled.div`
   display: flex;
   align-items: center;
   gap: 21px;
-  justify-content: space-between;
   @media only screen and (min-width: 768px) {
   }
 `;
