@@ -10,7 +10,6 @@ import {
   CloseButton,
   ModalContent,
   Form,
-  // TextArea,
 } from './ModalBlog.styled';
 import sprite from 'img/sprite.svg';
 
@@ -103,7 +102,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
     <Modal onClick={handleEvent}>
       <ModalContent>
         <CloseButton onClick={handleClose}>
-          <svg width="30px" height="30px">
+          <svg width="20px" height="20px">
             <use href={sprite + '#icon-cancel'} />
           </svg>
         </CloseButton>
