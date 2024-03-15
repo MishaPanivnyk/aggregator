@@ -42,7 +42,7 @@ export const Blog = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/blogs`
+          `${process.env.REACT_APP_BACKEND_URL}/blogs/`
         );
 
         setBlogs(response.data);
