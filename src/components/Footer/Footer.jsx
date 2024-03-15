@@ -17,7 +17,7 @@ import {
   CopyrightDesc,
   CategoryContainer,
 } from './Footer.styled';
-import logo from 'img/Logo-footer.svg';
+import logo from 'img/Logo-footer.png';
 import sprite from 'img/sprite.svg';
 import { Container } from 'components/Container/Container';
 export const Footer = ({ onClick }) => {
@@ -53,7 +53,7 @@ export const Footer = ({ onClick }) => {
         <Section>
           <FooterLogoContainer>
             <FooterLogo to="/" onClick={onClick}>
-              <img src={logo} alt="logo" />
+              <img src={logo} alt="logo" width="100px" height="100px" />
             </FooterLogo>
             <SocList>
               <SocItem>
