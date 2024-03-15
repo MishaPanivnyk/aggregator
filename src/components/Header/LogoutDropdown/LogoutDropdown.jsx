@@ -48,11 +48,17 @@ export const LogoutDropdown = ({ onLogout }) => {
   };
 
   useEffect(() => {
-    if (isConfirmOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    const handleScroll = () => {
+      if (!isConfirmOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    };
+
+    document.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
   }, [isConfirmOpen]);
 
   const handleAnimationEnd = () => {
@@ -60,6 +66,12 @@ export const LogoutDropdown = ({ onLogout }) => {
       setIsClosing(false);
     }
   };
+
+  useEffect(() => {
+    if (!isConfirmOpen) {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isConfirmOpen]);
 
   return (
     <ModalLogoutContainer onClick={handleContainerClick}>
