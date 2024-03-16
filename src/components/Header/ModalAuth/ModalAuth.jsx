@@ -21,7 +21,7 @@ export const ModalAuth = ({ isOpen, onClose }) => {
     confirmpassword: '',
   });
   const [isClosing, setIsClosing] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const handleChange = e => {
     const { name, value } = e.target;
