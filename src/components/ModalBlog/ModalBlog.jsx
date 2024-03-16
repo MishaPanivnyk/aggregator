@@ -84,7 +84,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
 
   const handleEvent = e => {
     if (e.type === 'keydown' && e.keyCode !== 27) return;
-    if (e.type === 'click' && e.target !== e.currentTarget) return;
+    if (e.type === 'click' && !e.target.closest('.ModalContent')) return;
     onClose();
   };
 
