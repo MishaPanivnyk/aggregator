@@ -13,6 +13,7 @@ import {
   AdvantagesUkdImg,
 } from './Advantages.styled';
 import sprite from 'img/sprite.svg';
+import ukdAD from 'img/ukd-ad.gif';
 
 export const Advantages = () => {
   const isMobile = useMediaQuery({
@@ -29,13 +30,12 @@ export const Advantages = () => {
     <AdvantagesContainer>
       <Container>
         <AdvantagesUkdContainer>
-          <AdvantagesUkdLink href="https://ukd.edu.ua/" data-id="672308">
+          <AdvantagesUkdLink href="https://ukd.edu.ua/">
             <AdvantagesUkdImg
               class="lazy-loaded"
-              src="https://galka.if.ua/app/uploads/2023/01/halka-ukd-desk.gif?x19487"
+              src={ukdAD}
               data-lazy-type="image"
-              data-src="https://galka.if.ua/app/uploads/2023/01/halka-ukd-desk.gif?x19487"
-              alt="УКД Деск"
+              alt="УКД Реклама"
             />
           </AdvantagesUkdLink>
         </AdvantagesUkdContainer>
