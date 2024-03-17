@@ -21,14 +21,20 @@ export const SocList = styled.ul`
   display: flex;
   gap: 22px;
   justify-content: center;
-  margin-top: 27px;
   margin-bottom: 40px;
-
   @media only screen and (min-width: 768px) {
+    margin-bottom: 0px;
   }
 `;
 export const SocItem = styled.li`
   cursor: pointer;
+  fill: #fff;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    fill: #01e45c;
+  }
   @media only screen and (min-width: 768px) {
   }
 `;
@@ -120,6 +126,10 @@ export const CopyrightDesc = styled(NavLink)`
   line-height: 15px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  & span {
+    font-weight: 700;
+    text-decoration: underline;
+  }
 `;
 export const FooterLogoContainer = styled.div`
   display: flex;

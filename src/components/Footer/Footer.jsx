@@ -178,7 +178,9 @@ export const Footer = ({ onClick }) => {
         </Section>
         <Copyright>
           <CopyrightInfo>Угода користувача</CopyrightInfo>
-          <CopyrightDesc>© 2024. Logo. Всі права захищені</CopyrightDesc>
+          <CopyrightDesc>
+            © 2024. By ❤️<span>VDOMA</span> . Всі права захищені
+          </CopyrightDesc>
         </Copyright>
       </Container>
     </FooterBox>
