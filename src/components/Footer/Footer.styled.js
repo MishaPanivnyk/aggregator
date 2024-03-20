@@ -30,6 +30,10 @@ export const SocItem = styled.li`
   cursor: pointer;
   fill: #fff;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+`;
+export const SocItemLink = styled.a`
+  fill: #fff;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -38,7 +42,6 @@ export const SocItem = styled.li`
   @media only screen and (min-width: 768px) {
   }
 `;
-
 export const Copyright = styled.div`
   padding-top: 19px;
   border-top: 1px solid #2c2c2c;

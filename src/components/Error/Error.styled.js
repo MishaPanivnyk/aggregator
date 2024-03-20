@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const ErrorSection = styled.section`
   padding-top: 36px;
@@ -48,4 +49,34 @@ export const ErrorDesc = styled.p`
 export const ErrorIcon = styled.svg`
   display: block;
   margin: 0 auto;
+`;
+export const BackButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const BackButton = styled(NavLink)`
+  padding: 20px 20px;
+  background-color: #00d254;
+  color: #ffffff;
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus {
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgb(34, 37, 42);
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 300px;
+  }
 `;

@@ -1,7 +1,16 @@
 import { Container } from '../Container/Container';
-import { ErrorSection, ErrorTitle, ErrorDesc, ErrorIcon } from './Error.styled';
+import {
+  ErrorSection,
+  ErrorTitle,
+  ErrorDesc,
+  ErrorIcon,
+  BackButton,
+  BackButtonContainer,
+} from './Error.styled';
 import sprite from 'img/sprite.svg';
-export const Error = () => {
+import { FaHome } from 'react-icons/fa';
+
+export const Error = ({ onClick }) => {
   return (
     <ErrorSection>
       <Container>
@@ -13,6 +22,12 @@ export const Error = () => {
           Можливо, вона застаріла, була видалена, або була введена невірна
           адреса в адресному рядку
         </ErrorDesc>
+        <BackButtonContainer>
+          <BackButton to="/" onClick={onClick}>
+            На Головну
+            <FaHome style={{ marginLeft: '10px' }} />
+          </BackButton>
+        </BackButtonContainer>
       </Container>
     </ErrorSection>
   );

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const fadeIn = keyframes`
   from {
@@ -38,7 +39,8 @@ export const ModalBtnLogaut = styled.button`
   &:hover,
   &:focus {
     color: #fff;
-    background-color: #01e45c;
+    background-color: rgb(34, 37, 42);
+    border: 4px solid rgb(34, 37, 42);
     transform: translate(0, -3px);
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -99,7 +101,8 @@ export const ConfirmButton = styled.button`
   &:hover,
   &:focus {
     color: #fff;
-    background-color: #01e45c;
+    background-color: rgb(34, 37, 42);
+    border: 4px solid rgb(34, 37, 42);
     transform: translate(0, -3px);
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -164,4 +167,18 @@ export const ModalConfirmTitle = styled.p`
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 8px;
+`;
+export const EditProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+export const EditProfile = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Montserrat';
+`;
+export const ButtonEdit = styled(NavLink)`
+  cursor: pointer;
 `;
