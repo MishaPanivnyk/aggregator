@@ -64,7 +64,10 @@ const Blog = () => {
         <Container>
           <BlogTitle>{blog.title}</BlogTitle>
           <BlogImgContainer>
-            <BlogImg src={blog.imageUrl} alt={blog.title} />
+            <BlogImg
+              src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
+              alt={blog.title}
+            />
             <BlogContentContainer
               dangerouslySetInnerHTML={createMarkup(blog.content)}
             />

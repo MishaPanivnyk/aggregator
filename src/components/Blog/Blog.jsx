@@ -95,21 +95,24 @@ export const Blog = () => {
                       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                     )
                     .map(blog => (
-                      <BlogItem key={blog._id}>
-                        <DeleteIcon onClick={() => handleDelete(blog._id)}>
+                      <BlogItem key={blog.id}>
+                        <DeleteIcon onClick={() => handleDelete(blog.id)}>
                           <svg width="30px" height="30px">
                             <use href={sprite + '#icon-close'} />
                           </svg>
                         </DeleteIcon>
 
                         <BlogItemDesc>{blog.category}</BlogItemDesc>
-                        <BlogItemImg src={blog.imageUrl} alt={blog.title} />
+                        <BlogItemImg
+                          src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
+                          alt={blog.title}
+                        />
                         <BlogItemTitle>{blog.title}</BlogItemTitle>
                         <BlogItemDateContainer>
                           <BlogItemDate>
                             {formatDate(blog.createdAt)}
                           </BlogItemDate>
-                          <BlogItemBtn to={`/blogs/${blog._id}`}>
+                          <BlogItemBtn to={`/blogs/${blog.id}`}>
                             Детальніше
                           </BlogItemBtn>
                         </BlogItemDateContainer>
@@ -121,15 +124,18 @@ export const Blog = () => {
                     )
                     .slice(0, 3)
                     .map(blog => (
-                      <BlogItem key={blog._id}>
+                      <BlogItem key={blog.id}>
                         <BlogItemDesc>{blog.category}</BlogItemDesc>
-                        <BlogItemImg src={blog.imageUrl} alt={blog.title} />
+                        <BlogItemImg
+                          src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
+                          alt={blog.title}
+                        />
                         <BlogItemTitle>{blog.title}</BlogItemTitle>
                         <BlogItemDateContainer>
                           <BlogItemDate>
                             {formatDate(blog.createdAt)}
                           </BlogItemDate>
-                          <BlogItemBtn to={`/blogs/${blog._id}`}>
+                          <BlogItemBtn to={`/blogs/${blog.id}`}>
                             Детальніше
                           </BlogItemBtn>
                         </BlogItemDateContainer>

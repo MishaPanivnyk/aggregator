@@ -26,6 +26,7 @@ export const BlogTitle = styled.h2`
     font-size: 30px;
   }
 `;
+
 export const BlogList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -55,7 +56,9 @@ export const BlogItem = styled.li`
   flex-direction: column;
   justify-content: center;
   @media only screen and (min-width: 1024px) {
-    width: calc(25.33% - 10px);
+    width: 445px;
+
+    /* width: calc(23.333% - 20px); */
   }
 `;
 export const BlogItemImg = styled.img`
