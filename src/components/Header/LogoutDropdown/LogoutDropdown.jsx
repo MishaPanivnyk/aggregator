@@ -10,7 +10,12 @@ import {
   ModalConfirmTitle,
   CancelButton,
   ButtonContainer,
+  EditProfile,
+  EditProfileContainer,
+  ButtonEdit,
 } from './LogoutDropdown.styled';
+
+import { FiEdit2 } from 'react-icons/fi';
 
 export const LogoutDropdown = ({ onLogout }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -34,6 +39,9 @@ export const LogoutDropdown = ({ onLogout }) => {
     } catch (error) {
       if (error.response && error.response.status === 401) {
         toast.error('Невірний токен або авторизація!');
+
+        localStorage.removeItem('token');
+        onLogout();
       }
     }
     setIsConfirmOpen(false);
@@ -75,6 +83,12 @@ export const LogoutDropdown = ({ onLogout }) => {
 
   return (
     <ModalLogoutContainer onClick={handleContainerClick}>
+      <EditProfileContainer>
+        <EditProfile>Edit profile</EditProfile>
+        <ButtonEdit to="/profile">
+          <FiEdit2 />
+        </ButtonEdit>
+      </EditProfileContainer>
       <ModalBtnLogaut onClick={toggleConfirm}>Logout</ModalBtnLogaut>
       {isConfirmOpen && (
         <ModalBackdrop>
