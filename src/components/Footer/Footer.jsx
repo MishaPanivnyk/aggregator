@@ -16,6 +16,7 @@ import {
   CopyrightInfo,
   CopyrightDesc,
   CategoryContainer,
+  SocItemLink,
 } from './Footer.styled';
 import logo from 'img/Logo-footer.png';
 import sprite from 'img/sprite.svg';
@@ -57,24 +58,32 @@ export const Footer = ({ onClick }) => {
             </FooterLogo>
             <SocList>
               <SocItem>
-                <svg width="18px" height="18px">
-                  <use href={sprite + '#icon-telegram'} />
-                </svg>
+                <SocItemLink href="https://t.me/diwwmix">
+                  <svg width="18px" height="18px">
+                    <use href={sprite + '#icon-telegram'} />
+                  </svg>
+                </SocItemLink>
               </SocItem>
               <SocItem>
-                <svg width="18px" height="18px">
-                  <use href={sprite + '#icon-instagram'} />
-                </svg>
+                <SocItemLink href="https://www.instagram.com/_nasti4ka.s_?igsh=MjZiMXB3aTQ5aXp6">
+                  <svg width="18px" height="18px">
+                    <use href={sprite + '#icon-instagram'} />
+                  </svg>
+                </SocItemLink>
               </SocItem>
               <SocItem>
-                <svg width="18px" height="18px">
-                  <use href={sprite + '#icon-youtube'} />
-                </svg>
+                <SocItemLink href="https://youtu.be/I7mrN3Qt6TE?si=-HlG8S_ZdR1uX1Sg">
+                  <svg width="18px" height="18px">
+                    <use href={sprite + '#icon-youtube'} />
+                  </svg>
+                </SocItemLink>
               </SocItem>
               <SocItem>
-                <svg width="18px" height="18px">
-                  <use href={sprite + '#icon-facebook'} />
-                </svg>
+                <SocItemLink href="https://www.facebook.com/profile.php?id=100035212537406&locale=uk_UA">
+                  <svg width="18px" height="18px">
+                    <use href={sprite + '#icon-facebook'} />
+                  </svg>
+                </SocItemLink>
               </SocItem>
             </SocList>
           </FooterLogoContainer>
@@ -179,7 +188,7 @@ export const Footer = ({ onClick }) => {
         <Copyright>
           <CopyrightInfo>Угода користувача</CopyrightInfo>
           <CopyrightDesc>
-            © 2024. By ❤️<span>VDOMA</span> . Всі права захищені
+            © 2024. By ❤️ <span>VDOMA</span> . Всі права захищені
           </CopyrightDesc>
         </Copyright>
       </Container>
