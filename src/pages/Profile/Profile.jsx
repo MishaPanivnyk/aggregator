@@ -30,7 +30,7 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, []);
+  }, [token]);
 
   return (
     <main>
