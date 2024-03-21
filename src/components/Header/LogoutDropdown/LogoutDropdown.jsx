@@ -86,7 +86,7 @@ export const LogoutDropdown = ({ onLogout }) => {
       <EditProfileContainer>
         <EditProfile>Edit profile</EditProfile>
         <ButtonEdit to="/profile">
-          <FiEdit2 />
+          <FiEdit2 color='black'/>
         </ButtonEdit>
       </EditProfileContainer>
       <ModalBtnLogaut onClick={toggleConfirm}>Logout</ModalBtnLogaut>

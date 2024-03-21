@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, AvatarContainer } from './Avatar.styled';
 import { ModalAuth } from '../ModalAuth/ModalAuth';
 import { LogoutDropdown } from '../LogoutDropdown/LogoutDropdown';
-// import avatar from 'img/Avatar.jpg';
+import defaultAvatar from 'img/Avatar.jpg';
 
 export const Avatar = ({ onClick }) => {
   const [showModal, setShowModal] = useState(false);
@@ -28,10 +28,16 @@ export const Avatar = ({ onClick }) => {
           );
 
           setProfileData(response.data);
-          setImageUrl(response.data.imageUrl);
+          if (response.data.imageUrl) {
+            setImageUrl(response.data.imageUrl);
+          } else {
+            setImageUrl(defaultAvatar);
+          }
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error);
         }
+      } else {
+        setImageUrl(defaultAvatar);
       }
     };
 
@@ -53,7 +59,6 @@ export const Avatar = ({ onClick }) => {
     <AvatarContainer>
       <Button type="button" onClick={handleClick}>
         <img src={imageUrl} alt="avatar" />
-        {/* <img src={avatar} alt="avatar" /> */}
       </Button>
       {showModal &&
         (token ? (

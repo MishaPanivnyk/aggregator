@@ -6,17 +6,30 @@ import { Container } from 'components/Container/Container';
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token');
 
-    axios
-      .get('https://aggregator-django.onrender.com/api/profile/', {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      })
-      .then(response => setProfileData(response.data))
-      .catch(error => console.error('Error fetching profile data:', error));
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      if (token) {
+        try {
+          console.log('Token being sent:', token);
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/api/profile/`,
+            {
+              headers: {
+                Authorization: `token ${token}`,
+              },
+            }
+          );
+
+          setProfileData(response.data);
+        } catch (error) {
+          console.error('There was a problem with the fetch operation:', error);
+        }
+      }
+    };
+
+    fetchProfileData();
   }, []);
 
   return (
@@ -25,7 +38,7 @@ const Profile = () => {
         <ProfileContainer>
           {profileData && (
             <>
-              <Avatar src={profileData.avatar} alt="Profile Avatar" />
+              <Avatar src={profileData.imageUrl} alt="Profile Avatar" />
               <Nickname>{profileData.username}</Nickname>
               <Email>{profileData.email}</Email>
             </>
