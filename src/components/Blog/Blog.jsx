@@ -68,10 +68,12 @@ export const Blog = () => {
     setIsDeleting(true);
     console.log(isDeleting);
     try {
-      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/blogs/${id}`);
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/blogs/${id}/delete`
+      );
 
       toast.success('Blog delete successfully!');
-      setBlogs(blogs.filter(blog => blog._id !== id));
+      setBlogs(blogs.filter(blog => blog.id !== id));
     } catch (error) {
       toast.error('Error deleting blog');
       console.error('Error deleting blog:', error);

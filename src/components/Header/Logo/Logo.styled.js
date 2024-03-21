@@ -14,6 +14,8 @@ export const Link = styled(NavLink)`
 
     @media only screen and (min-width: 768px) {
       margin-right: 0px;
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -27,6 +29,7 @@ export const Link = styled(NavLink)`
     margin-left: 10px;
 
     @media only screen and (min-width: 768px) {
+      font-size: 16px;
     }
   }
 
