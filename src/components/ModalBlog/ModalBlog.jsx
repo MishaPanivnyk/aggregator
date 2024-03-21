@@ -13,6 +13,7 @@ import {
 } from './ModalBlog.styled';
 import sprite from 'img/sprite.svg';
 
+const token = localStorage.getItem('token');
 export const ModalForm = ({ onClose, updateBlogs }) => {
   const [formData, setFormData] = useState({
     title: '',
@@ -60,10 +61,11 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/blogs`,
+        `${process.env.REACT_APP_BACKEND_URL}/blogs/create/`,
         formDataToSend,
         {
           headers: {
+            Authorization: `token ${token}`,
             'Content-Type': 'multipart/form-data',
           },
         }
