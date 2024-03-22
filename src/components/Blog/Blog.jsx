@@ -19,6 +19,7 @@ import {
   DeleteIcon,
   LinkAdd,
   ContainerAddBtn,
+  BlogItemContainerCenter,
 } from './Blog.styled';
 import { Loader } from 'components/Loader/Loader';
 import { ModalForm } from 'components/ModalBlog/ModalBlog';
@@ -111,61 +112,61 @@ export const Blog = () => {
             <Loader />
           ) : (
             <BlogList>
-              {location.pathname === '/blogs'
-                ? [...blogs]
-                    .sort(
-                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-                    )
-                    .map(blog => (
-                      <BlogItem key={blog.id}>
-                        {isCreator && ( // Перевірка, чи має користувач права IsCreator
-                          <DeleteIcon onClick={() => handleDelete(blog.id)}>
-                            <svg width="30px" height="30px">
-                              <use href={sprite + '#icon-close'} />
-                            </svg>
-                          </DeleteIcon>
-                        )}
-                        <BlogItemDesc>{blog.category}</BlogItemDesc>
-                        <BlogItemImg
-                          src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
-                          alt={blog.title}
-                        />
-                        <BlogItemTitle>{blog.title}</BlogItemTitle>
-                        <BlogItemDateContainer>
-                          <BlogItemDate>
-                            {formatDate(blog.createdAt)}
-                          </BlogItemDate>
-                          <BlogItemBtn to={`/blogs/${blog.id}`}>
-                            Детальніше
-                          </BlogItemBtn>
-                        </BlogItemDateContainer>
-                      </BlogItem>
-                    ))
-                : [...blogs]
-                    .sort(
-                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-                    )
-                    .slice(0, 3)
-                    .map(blog => (
-                      <BlogItem key={blog.id}>
-                        <BlogItemDesc>{blog.category}</BlogItemDesc>
-                        <BlogItemImg
-                          src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
-                          alt={blog.title}
-                        />
-                        <BlogItemTitle>{blog.title}</BlogItemTitle>
-                        <BlogItemDateContainer>
-                          <BlogItemDate>
-                            {formatDate(blog.createdAt)}
-                          </BlogItemDate>
-                          <BlogItemBtn to={`/blogs/${blog.id}`}>
-                            Детальніше
-                          </BlogItemBtn>
-                        </BlogItemDateContainer>
-                      </BlogItem>
-                    ))}
-              {location.pathname === '/blogs' &&
-                isCreator && ( // Перевірка, чи має користувач права IsCreator
+              <BlogItemContainerCenter>
+                {location.pathname === '/blogs'
+                  ? [...blogs]
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
+                      .map(blog => (
+                        <BlogItem key={blog.id}>
+                          {isCreator && (
+                            <DeleteIcon onClick={() => handleDelete(blog.id)}>
+                              <svg width="30px" height="30px">
+                                <use href={sprite + '#icon-close'} />
+                              </svg>
+                            </DeleteIcon>
+                          )}
+                          <BlogItemDesc>{blog.category}</BlogItemDesc>
+                          <BlogItemImg
+                            src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
+                            alt={blog.title}
+                          />
+                          <BlogItemTitle>{blog.title}</BlogItemTitle>
+                          <BlogItemDateContainer>
+                            <BlogItemDate>
+                              {formatDate(blog.createdAt)}
+                            </BlogItemDate>
+                            <BlogItemBtn to={`/blogs/${blog.id}`}>
+                              Детальніше
+                            </BlogItemBtn>
+                          </BlogItemDateContainer>
+                        </BlogItem>
+                      ))
+                  : [...blogs]
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
+                      .slice(0, 3)
+                      .map(blog => (
+                        <BlogItem key={blog.id}>
+                          <BlogItemDesc>{blog.category}</BlogItemDesc>
+                          <BlogItemImg
+                            src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
+                            alt={blog.title}
+                          />
+                          <BlogItemTitle>{blog.title}</BlogItemTitle>
+                          <BlogItemDateContainer>
+                            <BlogItemDate>
+                              {formatDate(blog.createdAt)}
+                            </BlogItemDate>
+                            <BlogItemBtn to={`/blogs/${blog.id}`}>
+                              Детальніше
+                            </BlogItemBtn>
+                          </BlogItemDateContainer>
+                        </BlogItem>
+                      ))}
+                {location.pathname === '/blogs' && isCreator && (
                   <BlogItem>
                     <ContainerAddBtn>
                       <LinkAdd onClick={toggleModal}>
@@ -176,6 +177,7 @@ export const Blog = () => {
                     </ContainerAddBtn>
                   </BlogItem>
                 )}
+              </BlogItemContainerCenter>
             </BlogList>
           )}
         </Section>

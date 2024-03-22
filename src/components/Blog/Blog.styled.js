@@ -56,7 +56,7 @@ export const BlogItem = styled.li`
   flex-direction: column;
   justify-content: center;
   @media only screen and (min-width: 1024px) {
-    width: 445px;
+    width: 350px;
 
     /* width: calc(23.333% - 20px); */
   }
@@ -68,6 +68,19 @@ export const BlogItemImg = styled.img`
   margin-bottom: 20px;
   object-fit: cover;
 `;
+
+export const BlogItemContainerCenter = styled.div`
+  @media only screen and (min-width: 1024px) {
+    display: flex;
+    flex-direction: initial;
+    align-items: initial;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1400px;
+  }
+`;
+
 export const BlogItemDesc = styled.p`
   border-radius: 100px;
   background: #2b2b2b;
