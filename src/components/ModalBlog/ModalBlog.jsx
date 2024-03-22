@@ -119,6 +119,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
           <ReactQuill
             theme="snow"
             rows="10"
+            placeholder="Content"
             value={formData.content}
             onChange={value => setFormData({ ...formData, content: value })}
           />
