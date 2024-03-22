@@ -70,6 +70,9 @@ export const BlogItemImg = styled.img`
 `;
 
 export const BlogItemContainerCenter = styled.div`
+display: flex;
+flex-direction: column;
+gap: 20px;
   @media only screen and (min-width: 1024px) {
     display: flex;
     flex-direction: initial;
