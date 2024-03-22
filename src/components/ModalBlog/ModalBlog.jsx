@@ -13,7 +13,6 @@ import {
 } from './ModalBlog.styled';
 import sprite from 'img/sprite.svg';
 
-const token = localStorage.getItem('token');
 export const ModalForm = ({ onClose, updateBlogs }) => {
   const [formData, setFormData] = useState({
     title: '',
@@ -22,6 +21,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
     image: null,
     category: '',
   });
+  const token = localStorage.getItem('token');
 
   const handleChange = e => {
     const { name, value, files } = e.target;
@@ -56,7 +56,7 @@ export const ModalForm = ({ onClose, updateBlogs }) => {
     formDataToSend.append('title', formData.title);
     formDataToSend.append('content', formData.content);
     formDataToSend.append('author', formData.author);
-    formDataToSend.append('image', formData.image);
+    formDataToSend.append('imageUrl', formData.image);
     formDataToSend.append('category', formData.category);
 
     try {

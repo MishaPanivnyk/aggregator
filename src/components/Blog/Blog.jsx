@@ -36,9 +36,11 @@ export const Blog = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isCreator, setIsCreator] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -54,6 +56,24 @@ export const Blog = () => {
     };
 
     fetchData();
+
+    const checkIsCreator = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/api/profile/`,
+          {
+            headers: {
+              Authorization: `token ${token}`,
+            },
+          }
+        );
+        setIsCreator(response.data.isCreator);
+      } catch (error) {
+        console.error('Error fetching user profile: ', error);
+      }
+    };
+
+    checkIsCreator();
   }, []);
 
   const toggleModal = () => {
@@ -98,12 +118,13 @@ export const Blog = () => {
                     )
                     .map(blog => (
                       <BlogItem key={blog.id}>
-                        <DeleteIcon onClick={() => handleDelete(blog.id)}>
-                          <svg width="30px" height="30px">
-                            <use href={sprite + '#icon-close'} />
-                          </svg>
-                        </DeleteIcon>
-
+                        {isCreator && ( // Перевірка, чи має користувач права IsCreator
+                          <DeleteIcon onClick={() => handleDelete(blog.id)}>
+                            <svg width="30px" height="30px">
+                              <use href={sprite + '#icon-close'} />
+                            </svg>
+                          </DeleteIcon>
+                        )}
                         <BlogItemDesc>{blog.category}</BlogItemDesc>
                         <BlogItemImg
                           src={`https://res.cloudinary.com/dvtiwucbq/${blog.imageUrl} `}
@@ -143,17 +164,18 @@ export const Blog = () => {
                         </BlogItemDateContainer>
                       </BlogItem>
                     ))}
-              {location.pathname === '/blogs' && (
-                <BlogItem>
-                  <ContainerAddBtn>
-                    <LinkAdd onClick={toggleModal}>
-                      <svg>
-                        <use href={sprite + '#icon-add'} />
-                      </svg>
-                    </LinkAdd>
-                  </ContainerAddBtn>
-                </BlogItem>
-              )}
+              {location.pathname === '/blogs' &&
+                isCreator && ( // Перевірка, чи має користувач права IsCreator
+                  <BlogItem>
+                    <ContainerAddBtn>
+                      <LinkAdd onClick={toggleModal}>
+                        <svg>
+                          <use href={sprite + '#icon-add'} />
+                        </svg>
+                      </LinkAdd>
+                    </ContainerAddBtn>
+                  </BlogItem>
+                )}
             </BlogList>
           )}
         </Section>
