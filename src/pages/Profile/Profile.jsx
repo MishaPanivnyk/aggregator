@@ -190,7 +190,7 @@ const Profile = () => {
                                 <img
                                   src={URL.createObjectURL(newAvatar)}
                                   alt="preview"
-                                  style={{ width: '100px', marginTop: '10px' }}
+                                  style={{ width: '200px', marginTop: '10px' }}
                                 />
                               )}
                             </MDBModalBody>
