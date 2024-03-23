@@ -53,6 +53,7 @@ export const ModalLogoutContainer = styled.div`
   border-radius: 8px;
   padding: 18px;
   width: 160px;
+  z-index: 999;
   background-color: white;
   @media only screen and (min-width: 1024px) {
   }
