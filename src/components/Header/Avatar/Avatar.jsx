@@ -9,7 +9,7 @@ export const Avatar = ({ onClick }) => {
   const [showModal, setShowModal] = useState(false);
   // eslint-disable-next-line
   const [profileData, setProfileData] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(defaultAvatar);
 
   const token = localStorage.getItem('token');
 
