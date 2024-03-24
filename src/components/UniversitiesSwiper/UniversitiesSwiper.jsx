@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Container } from 'components/Container/Container';
+import { Loader } from 'components/Loader/Loader';
 import {
   UniversitiesContainer,
   NextButton,
@@ -21,6 +22,7 @@ import {
 SwiperCore.use([Navigation, Pagination]);
 export const UniversitiesSwiper = () => {
   const [universities, setUniversities] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUniversities = async () => {
@@ -44,8 +46,10 @@ export const UniversitiesSwiper = () => {
           return desiredUniversityNames.includes(university.universityName);
         });
         setUniversities(universitiesToDisplay);
+        setIsLoading(false);
       } catch (error) {
         console.error('There was a problem fetching universities:', error);
+        setIsLoading(false);
       }
     };
 
@@ -56,45 +60,49 @@ export const UniversitiesSwiper = () => {
     <UniversitiesContainer>
       <Container>
         <UniversitiesTitle>Університети</UniversitiesTitle>
-        <SwiperContainer>
-          <CenteredSwiper>
-            <Swiper
-              centeredSlides={true}
-              spaceBetween={30}
-              breakpoints={{
-                768: {
-                  slidesPerView: 3,
-                },
-                1024: {
-                  slidesPerView: 4,
-                },
-              }}
-              loop={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              modules={[Autoplay, Pagination, Navigation]}
-              navigation={{
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-              }}
-            >
-              {universities.map((university, index) => (
-                <SwiperSlide key={index}>
-                  <ImgContainer>
-                    <img src={university.img} alt="Univesity" />
-                  </ImgContainer>
-                </SwiperSlide>
-              ))}
-              <NextButton className="swiper-button-next"></NextButton>
-              <PrevButton className="swiper-button-prev"></PrevButton>
-            </Swiper>
-          </CenteredSwiper>
-        </SwiperContainer>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <SwiperContainer>
+            <CenteredSwiper>
+              <Swiper
+                centeredSlides={true}
+                spaceBetween={30}
+                breakpoints={{
+                  768: {
+                    slidesPerView: 3,
+                  },
+                  1024: {
+                    slidesPerView: 4,
+                  },
+                }}
+                loop={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Autoplay, Pagination, Navigation]}
+                navigation={{
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                }}
+              >
+                {universities.map((university, index) => (
+                  <SwiperSlide key={index}>
+                    <ImgContainer>
+                      <img src={university.img} alt="Univesity" />
+                    </ImgContainer>
+                  </SwiperSlide>
+                ))}
+                <NextButton className="swiper-button-next"></NextButton>
+                <PrevButton className="swiper-button-prev"></PrevButton>
+              </Swiper>
+            </CenteredSwiper>
+          </SwiperContainer>
+        )}
       </Container>
     </UniversitiesContainer>
   );

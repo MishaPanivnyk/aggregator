@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Button, AvatarContainer } from './Avatar.styled';
 import { ModalAuth } from '../ModalAuth/ModalAuth';
@@ -9,9 +9,10 @@ export const Avatar = ({ onClick }) => {
   const [showModal, setShowModal] = useState(false);
   // eslint-disable-next-line
   const [profileData, setProfileData] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(defaultAvatar);
 
   const token = localStorage.getItem('token');
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -44,6 +45,20 @@ export const Avatar = ({ onClick }) => {
     fetchProfileData();
   }, [token]);
 
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const handleClick = () => {
     setShowModal(!showModal);
     if (typeof onClick === 'function') {
@@ -62,7 +77,9 @@ export const Avatar = ({ onClick }) => {
       </Button>
       {showModal &&
         (token ? (
-          <LogoutDropdown onLogout={handleLogout} />
+          <div ref={dropdownRef}>
+            <LogoutDropdown onLogout={handleLogout} />
+          </div>
         ) : (
           <ModalAuth isOpen={true} onClose={handleClick} />
         ))}
