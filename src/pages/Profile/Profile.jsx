@@ -24,6 +24,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { FaPlusCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import defaultAvatar from 'img/Avatar.jpg';
+import ErrorPage from 'pages/ErrorPage/ErrorPage';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -139,172 +140,177 @@ const Profile = () => {
 
   return (
     <main>
-      <ProfileContainer>
-        <Container>
-          {profileData && (
-            <MDBContainer className="py-5">
-              <MDBRow>
-                <MDBCol lg="4">
-                  <MDBCard className="mb-4">
-                    <MDBCardBody className="text-center">
-                      <div className="position-relative">
-                        {profileData.imageUrl ? (
-                          <img
-                            src={profileData.imageUrl}
-                            alt="avatar"
-                            className="rounded-circle"
-                            style={{ width: '150px' }}
-                            fluid
+      {token ? (
+        <ProfileContainer>
+          <Container>
+            {profileData && (
+              <MDBContainer className="py-5">
+                <MDBRow>
+                  <MDBCol lg="4">
+                    <MDBCard className="mb-4">
+                      <MDBCardBody className="text-center">
+                        <div className="position-relative">
+                          {profileData.imageUrl ? (
+                            <img
+                              src={profileData.imageUrl}
+                              alt="avatar"
+                              className="rounded-circle"
+                              style={{ width: '150px' }}
+                              fluid
+                            />
+                          ) : (
+                            <img
+                              src={defaultAvatar}
+                              alt="default avatar"
+                              className="rounded-circle"
+                              style={{ width: '150px' }}
+                              fluid
+                            />
+                          )}
+                          <FaPlusCircle
+                            onClick={toggleOpen}
+                            className="btn-icon"
                           />
-                        ) : (
-                          <img
-                            src={defaultAvatar}
-                            alt="default avatar"
-                            className="rounded-circle"
-                            style={{ width: '150px' }}
-                            fluid
-                          />
-                        )}
-                        <FaPlusCircle
-                          onClick={toggleOpen}
-                          className="btn-icon"
-                        />
-                      </div>
-                      <MDBModal open={basicModal} setOpen={setBasicModal}>
-                        <MDBModalDialog>
-                          <MDBModalContent>
-                            <MDBModalHeader>
-                              <MDBModalTitle>
-                                Завантаження аватара
-                              </MDBModalTitle>
-                            </MDBModalHeader>
-                            <MDBModalBody>
-                              <MDBFile
-                                type="file"
-                                id="formFileMultiple"
-                                onChange={handleFileChange}
-                                accept="image/*"
-                                multiple
-                              />
-                              {newAvatar && (
-                                <img
-                                  src={URL.createObjectURL(newAvatar)}
-                                  alt="preview"
-                                  style={{ width: '200px', marginTop: '10px' }}
+                        </div>
+                        <MDBModal open={basicModal} setOpen={setBasicModal}>
+                          <MDBModalDialog>
+                            <MDBModalContent>
+                              <MDBModalHeader>
+                                <MDBModalTitle>
+                                  Завантаження аватара
+                                </MDBModalTitle>
+                              </MDBModalHeader>
+                              <MDBModalBody>
+                                <MDBFile
+                                  type="file"
+                                  id="formFileMultiple"
+                                  onChange={handleFileChange}
+                                  accept="image/*"
+                                  multiple
                                 />
-                              )}
-                            </MDBModalBody>
-                            <MDBModalFooter>
-                              <MDBBtn color="secondary" onClick={toggleOpen}>
-                                Закрити
-                              </MDBBtn>
-                              <MDBBtn color="primary" onClick={handleSubmit}>
-                                Зберегти
-                              </MDBBtn>
-                            </MDBModalFooter>
-                          </MDBModalContent>
-                        </MDBModalDialog>
-                      </MDBModal>
-                      <p className="text-muted mb-1">
-                        {profileData.isCreator ? 'Creator' : 'User'}
-                      </p>
-                      <p className="text-muted mb-4">Misha Panivnyk</p>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-                <MDBCol lg="8">
-                  <MDBCard className="mb-4">
-                    <MDBCardBody>
-                      <MDBRow>
-                        <MDBCol sm="3">
-                          <MDBCardText>Full Name</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                          <MDBCardText className="text-muted">
-                            Misha Panivnyk
-                          </MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                      <hr />
-                      <MDBRow>
-                        <MDBCol sm="3">
-                          <MDBCardText>Username</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                          <MDBInput
-                            label="Name input"
-                            id="typeName"
-                            type="text"
-                            name="username"
-                            value={
-                              editedFields.username || profileData.username
-                            }
-                            onChange={handleInputChange}
-                          />
-                        </MDBCol>
-                      </MDBRow>
-                      <hr />
-                      <MDBRow>
-                        <MDBCol sm="3">
-                          <MDBCardText>Email</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                          <MDBInput
-                            label="Email input"
-                            id="typeEmail"
-                            type="email"
-                            name="email"
-                            value={editedFields.email || profileData.email}
-                            onChange={handleInputChange}
-                          />
-                        </MDBCol>
-                      </MDBRow>
-                      <hr />
-                      <MDBRow>
-                        <MDBCol sm="3">
-                          <MDBCardText>Creator</MDBCardText>
-                        </MDBCol>
-                        <MDBCol sm="9">
-                          <MDBCardText className="text-muted">
-                            {profileData.isCreator ? 'Yes' : 'No'}
-                          </MDBCardText>
-                        </MDBCol>
-                      </MDBRow>
-                      <hr />
-                      <MDBBtn
-                        color="primary"
-                        onClick={handleEditSubmit}
-                        disabled={!isModified}
-                      >
-                        Зберегти зміни
-                      </MDBBtn>
-                    </MDBCardBody>
-                  </MDBCard>
+                                {newAvatar && (
+                                  <img
+                                    src={URL.createObjectURL(newAvatar)}
+                                    alt="preview"
+                                    style={{
+                                      width: '200px',
+                                      marginTop: '10px',
+                                    }}
+                                  />
+                                )}
+                              </MDBModalBody>
+                              <MDBModalFooter>
+                                <MDBBtn color="secondary" onClick={toggleOpen}>
+                                  Закрити
+                                </MDBBtn>
+                                <MDBBtn color="primary" onClick={handleSubmit}>
+                                  Зберегти
+                                </MDBBtn>
+                              </MDBModalFooter>
+                            </MDBModalContent>
+                          </MDBModalDialog>
+                        </MDBModal>
+                        <p className="text-muted mb-1">
+                          {profileData.isCreator ? 'Creator' : 'User'}
+                        </p>
+                        <p className="text-muted mb-4">Misha Panivnyk</p>
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+                  <MDBCol lg="8">
+                    <MDBCard className="mb-4">
+                      <MDBCardBody>
+                        <MDBRow>
+                          <MDBCol sm="3">
+                            <MDBCardText>Full Name</MDBCardText>
+                          </MDBCol>
+                          <MDBCol sm="9">
+                            <MDBCardText className="text-muted">
+                              Misha Panivnyk
+                            </MDBCardText>
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <MDBRow>
+                          <MDBCol sm="3">
+                            <MDBCardText>Username</MDBCardText>
+                          </MDBCol>
+                          <MDBCol sm="9">
+                            <MDBInput
+                              id="typeName"
+                              type="text"
+                              name="username"
+                              value={
+                                editedFields.username || profileData.username
+                              }
+                              onChange={handleInputChange}
+                            />
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <MDBRow>
+                          <MDBCol sm="3">
+                            <MDBCardText>Email</MDBCardText>
+                          </MDBCol>
+                          <MDBCol sm="9">
+                            <MDBInput
+                              id="typeEmail"
+                              type="email"
+                              name="email"
+                              value={editedFields.email || profileData.email}
+                              onChange={handleInputChange}
+                            />
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <MDBRow>
+                          <MDBCol sm="3">
+                            <MDBCardText>Creator</MDBCardText>
+                          </MDBCol>
+                          <MDBCol sm="9">
+                            <MDBCardText className="text-muted">
+                              {profileData.isCreator ? 'Yes' : 'No'}
+                            </MDBCardText>
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <MDBBtn
+                          color="primary"
+                          onClick={handleEditSubmit}
+                          disabled={!isModified}
+                        >
+                          Зберегти зміни
+                        </MDBBtn>
+                      </MDBCardBody>
+                    </MDBCard>
 
-                  <MDBRow>
-                    <MDBCol md="6">
-                      <MDBCard className="mb-4 mb-md-0">
-                        <MDBCardBody>
-                          <MDBCardText
-                            className="mb-4"
-                            style={{ fontFamily: 'Roboto' }}
-                          >
-                            <span className="text-primary font-italic me-1">
-                              Відгуки
-                            </span>{' '}
-                            Користувача
-                          </MDBCardText>
-                          <hr />
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCol>
-              </MDBRow>
-            </MDBContainer>
-          )}
-        </Container>
-      </ProfileContainer>
+                    <MDBRow>
+                      <MDBCol md="6">
+                        <MDBCard className="mb-4 mb-md-0">
+                          <MDBCardBody>
+                            <MDBCardText
+                              className="mb-4"
+                              style={{ fontFamily: 'Roboto' }}
+                            >
+                              <span className="text-primary font-italic me-1">
+                                Відгуки
+                              </span>{' '}
+                              Користувача
+                            </MDBCardText>
+                            <hr />
+                          </MDBCardBody>
+                        </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
+                  </MDBCol>
+                </MDBRow>
+              </MDBContainer>
+            )}
+          </Container>
+        </ProfileContainer>
+      ) : (
+        <ErrorPage />
+      )}
     </main>
   );
 };
