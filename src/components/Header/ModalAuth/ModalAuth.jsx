@@ -106,6 +106,7 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                autoComplete="username"
               />
             </>
           ) : (
@@ -116,6 +117,7 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
+                autoComplete="username"
               />
               <ModalLabel>Email:</ModalLabel>
               <ModalInput
@@ -123,6 +125,7 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="email"
               />
             </>
           )}
