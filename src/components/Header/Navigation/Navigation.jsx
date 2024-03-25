@@ -13,8 +13,8 @@ export const Navigation = ({ onClick }) => {
       <Link to="/reviews" onClick={onClick}>
         Відгуки
       </Link>
-      <Link to="/actions" onClick={onClick}>
-        Акції
+      <Link to="/roulette" onClick={onClick}>
+        Рулетка
       </Link>
       <Link to="/blogs" onClick={onClick}>
         Блог
