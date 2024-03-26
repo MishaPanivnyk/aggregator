@@ -37,6 +37,7 @@ import {
 export const Universities = () => {
   const location = useLocation();
   const isUniversitiesPage = location.pathname === '/universities';
+  // eslint-disable-next-line
   const [popularDirections, setPopularDirections] = useState([
     'IT',
     'Право',
@@ -122,13 +123,13 @@ export const Universities = () => {
 
   useEffect(() => {
     updateVisibleUniversities();
+    // eslint-disable-next-line
   }, [currentPage, universities]);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
   const handleDirectionClick = direction => {
-    // Встановлюємо вибраний напрям
     setSelectedDirection(direction);
-    // Оновлюємо поточну сторінку пагінації на 1
+
     setCurrentPage(1);
   };
 

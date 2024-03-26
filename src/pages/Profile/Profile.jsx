@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ProfileContainer } from './Profile.styled';
-import { Container } from 'components/Container/Container';
+// import { Container } from 'components/Container/Container';
 import {
   MDBCol,
   MDBContainer,
