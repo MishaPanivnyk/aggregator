@@ -33,6 +33,7 @@ export const ScrollableContainer = styled(PerfectScrollbar)`
   .ps__thumb-x:focus {
     height: 7px;
   }
+
   @media only screen and (min-width: 768px) {
     margin-bottom: 22px;
   }
@@ -41,6 +42,19 @@ export const ScrollableContainer = styled(PerfectScrollbar)`
   }
 `;
 export const UniversitiesContainer = styled.section`
+  .mb-0 {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .page-link {
+    color: #2b2b2b;
+  }
+  .page-link.active,
+  .active > .page-link {
+    color: #fff;
+    background-color: #01e45c;
+  }
   padding-top: 50px;
   padding-bottom: 50px;
   @media only screen and (min-width: 768px) {
@@ -96,6 +110,9 @@ export const UniversitiesListContainer = styled.div`
   justify-content: center;
 
   @media only screen and (min-width: 768px) {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
   }
   @media only screen and (min-width: 1024px) {
     max-width: 1400px;
@@ -122,11 +139,13 @@ export const UniversitiesItem = styled.li`
 
   @media only screen and (min-width: 768px) {
     padding: 20px;
+    padding-right: 30px;
     display: flex;
-    gap: 70px;
+    gap: 30px;
     align-items: center;
   }
   @media only screen and (min-width: 1024px) {
+    gap: 70px;
     height: 180px;
     padding: 15px 40px;
   }

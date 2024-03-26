@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
 import sprite from 'img/sprite.svg';
+import { useLocation } from 'react-router-dom';
 import { Container } from 'components/Container/Container';
+import {
+  MDBPagination,
+  MDBPaginationItem,
+  MDBPaginationLink,
+} from 'mdb-react-ui-kit';
+
 import {
   UniversitiesContainer,
   UniversitiesTitle,
@@ -28,6 +35,8 @@ import {
 } from './Universities.styled';
 
 export const Universities = () => {
+  const location = useLocation();
+  const isUniversitiesPage = location.pathname === '/universities';
   const [popularDirections, setPopularDirections] = useState([
     'IT',
     'Право',
@@ -42,6 +51,7 @@ export const Universities = () => {
   ]);
   const [selectedDirection, setSelectedDirection] = useState('IT');
   const [universities, setUniversities] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [visibleUniversities, setVisibleUniversities] = useState([]);
   const [loading, setLoading] = useState(false);
   const universitiesPerPage = 5;
@@ -49,7 +59,7 @@ export const Universities = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true); // Початок завантаження
+        setLoading(true);
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/universities/`
         );
@@ -58,7 +68,7 @@ export const Universities = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false); // Кінець завантаження (навіть якщо сталася помилка)
+        setLoading(false);
       }
     };
 
@@ -68,7 +78,7 @@ export const Universities = () => {
   useEffect(() => {
     const fetchAllUniversities = async () => {
       try {
-        setLoading(true); // Початок завантаження
+        setLoading(true);
         const response = await axios.get(
           `${process.env.REACT_APP_BACKEND_URL}/universities`
         );
@@ -84,7 +94,7 @@ export const Universities = () => {
       } catch (error) {
         console.error('Error fetching all universities:', error);
       } finally {
-        setLoading(false); // Кінець завантаження (навіть якщо сталася помилка)
+        setLoading(false);
       }
     };
 
@@ -100,14 +110,34 @@ export const Universities = () => {
     }
   }, [universities]);
 
+  const updateVisibleUniversities = () => {
+    const indexOfLastUniversity = currentPage * universitiesPerPage;
+    const indexOfFirstUniversity = indexOfLastUniversity - universitiesPerPage;
+    const currentUniversities = universities.slice(
+      indexOfFirstUniversity,
+      indexOfLastUniversity
+    );
+    setVisibleUniversities(currentUniversities);
+  };
+
+  useEffect(() => {
+    updateVisibleUniversities();
+  }, [currentPage, universities]);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   const handleDirectionClick = direction => {
+    // Встановлюємо вибраний напрям
     setSelectedDirection(direction);
+    // Оновлюємо поточну сторінку пагінації на 1
+    setCurrentPage(1);
   };
 
   return (
     <UniversitiesContainer>
       <Container>
-        <UniversitiesTitle>Популярні напрями</UniversitiesTitle>
+        {!isUniversitiesPage && (
+          <UniversitiesTitle>Популярні напрями</UniversitiesTitle>
+        )}
         <ScrollableContainer
           options={{
             suppressScrollX: false,
@@ -133,8 +163,8 @@ export const Universities = () => {
         </ScrollableContainer>
         <UniversitiesListContainer>
           <UniversitiesList>
-            {loading ? ( // Перевірка, чи йде завантаження даних
-              <Loader /> // Якщо так, відображаємо Loader
+            {loading ? (
+              <Loader />
             ) : (
               visibleUniversities.map((university, index) => (
                 <UniversitiesItem key={index}>
@@ -210,11 +240,32 @@ export const Universities = () => {
             )}
           </UniversitiesList>
         </UniversitiesListContainer>
-        {universities.length > visibleUniversities.length && (
-          <ButtonContainer>
-            <ButtonMore to="/universities">Подивитись ще</ButtonMore>
-          </ButtonContainer>
-        )}
+        {isUniversitiesPage
+          ? universities.length > universitiesPerPage && (
+              <MDBPagination size="lg" className="mb-0">
+                {Array.from(
+                  {
+                    length: Math.ceil(
+                      universities.length / universitiesPerPage
+                    ),
+                  },
+                  (_, i) => (
+                    <MDBPaginationItem
+                      key={i}
+                      active={i + 1 === currentPage}
+                      onClick={() => paginate(i + 1)}
+                    >
+                      <MDBPaginationLink href="#">{i + 1}</MDBPaginationLink>
+                    </MDBPaginationItem>
+                  )
+                )}
+              </MDBPagination>
+            )
+          : universities.length > visibleUniversities.length && (
+              <ButtonContainer>
+                <ButtonMore to="/universities">Подивитись ще</ButtonMore>
+              </ButtonContainer>
+            )}
       </Container>
     </UniversitiesContainer>
   );
