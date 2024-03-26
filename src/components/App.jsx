@@ -6,6 +6,7 @@ import Blogs from 'pages/Blogs/Blogs';
 import Blog from 'pages/Blog/Blog';
 import Profile from 'pages/Profile/Profile';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
+import Universities from 'pages/Universities/Universities';
 import { ToastContainer } from 'react-toastify';
 import RoulettePage from 'pages/Roulette/Roulette';
 
@@ -18,6 +19,7 @@ export const App = () => {
           <Route exact path="/" element={<MainPage />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<Blog />} />
+          <Route path="/universities" element={<Universities />} />
           <Route path="/roulette" element={<RoulettePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<ErrorPage />} />

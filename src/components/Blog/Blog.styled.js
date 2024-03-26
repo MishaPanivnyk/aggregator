@@ -5,11 +5,9 @@ export const Section = styled.section`
   padding-top: 50px;
   padding-bottom: 21px;
   @media only screen and (min-width: 768px) {
-    padding-top: 30px;
     padding-bottom: 128px;
   }
   @media only screen and (min-width: 1024px) {
-    padding-top: 70px;
     padding-bottom: 56px;
   }
 `;
@@ -70,9 +68,15 @@ export const BlogItemImg = styled.img`
 `;
 
 export const BlogItemContainerCenter = styled.div`
-display: flex;
-flex-direction: column;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @media only screen and (min-width: 768px) {
+    flex-direction: initial;
+    max-width: 768px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   @media only screen and (min-width: 1024px) {
     display: flex;
     flex-direction: initial;

@@ -111,10 +111,12 @@ export const ModalInput = styled.input`
 `;
 export const CloseButton = styled.a`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  top: 20px;
+  top: 10px;
   right: 15px;
   position: absolute;
   cursor: pointer;
+  @media only screen and (min-width: 768px) {
+  }
   &:hover,
   &:focus {
     fill: red;
