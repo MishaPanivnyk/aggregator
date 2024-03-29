@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Container } from '../Container/Container';
 import {
   BlogItem,
+  BlogItemAdd,
   BlogItemBtn,
   BlogItemDate,
   BlogItemDesc,
@@ -167,7 +168,7 @@ export const Blog = () => {
                         </BlogItem>
                       ))}
                 {location.pathname === '/blogs' && isCreator && (
-                  <BlogItem>
+                  <BlogItemAdd>
                     <ContainerAddBtn>
                       <LinkAdd onClick={toggleModal}>
                         <svg>
@@ -175,7 +176,7 @@ export const Blog = () => {
                         </svg>
                       </LinkAdd>
                     </ContainerAddBtn>
-                  </BlogItem>
+                  </BlogItemAdd>
                 )}
               </BlogItemContainerCenter>
             </BlogList>

@@ -52,7 +52,25 @@ export const BlogItem = styled.li`
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
+  @media only screen and (min-width: 1024px) {
+    width: 350px;
+
+    /* width: calc(23.333% - 20px); */
+  }
+`;
+export const BlogItemAdd = styled.li`
+  width: 345px;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #f0f0f0;
+  background: #fff;
+  box-shadow: 0px 4px 26px 0px rgba(203, 203, 203, 0.25);
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+
   justify-content: center;
+
   @media only screen and (min-width: 1024px) {
     width: 350px;
 
@@ -61,8 +79,8 @@ export const BlogItem = styled.li`
 `;
 export const BlogItemImg = styled.img`
   width: 100%;
-  height: 100%;
-  /* position: relative; */
+  height: 348px;
+
   margin-bottom: 20px;
   object-fit: cover;
 `;
