@@ -52,6 +52,7 @@ export const BlogItem = styled.li`
   padding-bottom: 30px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   @media only screen and (min-width: 1024px) {
     width: 350px;
 
