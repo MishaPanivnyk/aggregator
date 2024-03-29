@@ -22,6 +22,7 @@ export const ModalAuth = ({ isOpen, onClose }) => {
   });
   const [isClosing, setIsClosing] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -66,6 +67,12 @@ export const ModalAuth = ({ isOpen, onClose }) => {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+    }
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -82,6 +89,15 @@ export const ModalAuth = ({ isOpen, onClose }) => {
       setIsClosing(false);
       onClose();
     }
+  };
+
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  // Додали обробник розфокусування для скидання стану isInputFocused
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
   };
 
   return (
@@ -107,6 +123,8 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 value={formData.username}
                 onChange={handleChange}
                 autoComplete="username"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               />
             </>
           ) : (
@@ -118,6 +136,8 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 value={formData.username}
                 onChange={handleChange}
                 autoComplete="username"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               />
               <ModalLabel>Email:</ModalLabel>
               <ModalInput
@@ -126,6 +146,8 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 value={formData.email}
                 onChange={handleChange}
                 autoComplete="email"
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               />
             </>
           )}
@@ -135,6 +157,8 @@ export const ModalAuth = ({ isOpen, onClose }) => {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
           />
           {!isLogin && (
             <>
@@ -144,6 +168,8 @@ export const ModalAuth = ({ isOpen, onClose }) => {
                 name="confirmpassword"
                 value={formData.confirmpassword}
                 onChange={handleChange}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
               />
             </>
           )}
@@ -153,14 +179,22 @@ export const ModalAuth = ({ isOpen, onClose }) => {
           {isLogin ? (
             <>
               Don't have an account?{' '}
-              <button type="button" onClick={() => setIsLogin(false)}>
+              <button
+                type="button"
+                onClick={() => setIsLogin(false)}
+                disabled={isInputFocused}
+              >
                 Sign Up
               </button>
             </>
           ) : (
             <>
               Already have an account?{' '}
-              <button type="button" onClick={() => setIsLogin(true)}>
+              <button
+                type="button"
+                onClick={() => setIsLogin(true)}
+                disabled={isInputFocused}
+              >
                 Login
               </button>
             </>
