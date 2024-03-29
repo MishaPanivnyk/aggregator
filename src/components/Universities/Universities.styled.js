@@ -109,8 +109,8 @@ export const DirectionItem = styled.li`
   }
 `;
 export const UniversitiesListContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 
   @media only screen and (min-width: 768px) {
     max-width: 768px;
@@ -213,12 +213,14 @@ export const UniversitiesItemRating = styled.p`
   line-height: 27px;
   display: flex;
   align-items: center;
+  margin-top: 10px;
   & svg {
     margin-right: 7px;
   }
   @media only screen and (min-width: 768px) {
     font-size: 18px;
     width: 50px;
+    margin-top: 0px;
   }
   @media only screen and (min-width: 1024px) {
   }
@@ -312,7 +314,8 @@ export const UniversitiesItemBtnLinkSite = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 7px 23px;
+  padding: 7px 18px;
+
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 132px;
   &:hover,
@@ -322,12 +325,13 @@ export const UniversitiesItemBtnLinkSite = styled(NavLink)`
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   @media only screen and (min-width: 768px) {
+    padding: 7px 23px;
   }
   @media only screen and (min-width: 1024px) {
   }
 `;
 export const UniversitiesItemBtnLinkId = styled(NavLink)`
-  padding: 7px 23px;
+  padding: 7px 10px;
   color: #2b2b2b;
   text-align: center;
   font-family: 'Open Sans';
@@ -350,6 +354,7 @@ export const UniversitiesItemBtnLinkId = styled(NavLink)`
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   @media only screen and (min-width: 768px) {
+    padding: 7px 23px;
   }
   @media only screen and (min-width: 1024px) {
   }
@@ -371,6 +376,8 @@ export const UniversitiesItemaAddCompare = styled.button`
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
+    display: flex;
+    align-items: center;
   }
 `;
 export const UniversitiesItemFeaturesContainer = styled.div`
