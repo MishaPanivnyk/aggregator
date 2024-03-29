@@ -9,6 +9,7 @@ import ErrorPage from 'pages/ErrorPage/ErrorPage';
 import Universities from 'pages/Universities/Universities';
 import { ToastContainer } from 'react-toastify';
 import RoulettePage from 'pages/Roulette/Roulette';
+import Search from 'pages/Search/Search';
 
 export const App = () => {
   return (
@@ -22,6 +23,7 @@ export const App = () => {
           <Route path="/universities" element={<Universities />} />
           <Route path="/roulette" element={<RoulettePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </SharedLayout>
