@@ -32,6 +32,7 @@ import {
   UniversitiesListContainer,
   UniversitiesItemFeaturesContainer,
   UniversitiesItemFeatures,
+  UniversitiesItemPriceContainer,
 } from './Universities.styled';
 
 export const Universities = () => {
@@ -56,25 +57,6 @@ export const Universities = () => {
   const [visibleUniversities, setVisibleUniversities] = useState([]);
   const [loading, setLoading] = useState(false);
   const universitiesPerPage = 5;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/universities/`
-        );
-        const data = response.data;
-        setUniversities(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const fetchAllUniversities = async () => {
@@ -102,19 +84,11 @@ export const Universities = () => {
     fetchAllUniversities();
   }, [selectedDirection]);
 
-  useEffect(() => {
-    if (universities.length > universitiesPerPage) {
-      const sortedByRating = universities.sort((a, b) => b.rating - a.rating);
-      setVisibleUniversities(sortedByRating.slice(0, universitiesPerPage));
-    } else {
-      setVisibleUniversities(universities);
-    }
-  }, [universities]);
-
   const updateVisibleUniversities = () => {
+    const sortedUniversities = universities.sort((a, b) => b.rating - a.rating);
     const indexOfLastUniversity = currentPage * universitiesPerPage;
     const indexOfFirstUniversity = indexOfLastUniversity - universitiesPerPage;
-    const currentUniversities = universities.slice(
+    const currentUniversities = sortedUniversities.slice(
       indexOfFirstUniversity,
       indexOfLastUniversity
     );
@@ -181,7 +155,7 @@ export const Universities = () => {
                       {university.rating}
                     </UniversitiesItemRating>
                     <UniversitiesItemReviews>
-                      Відгуки: {university.reviews.length}
+                      {/* Відгуки: {university.reviews.length} */}
                     </UniversitiesItemReviews>
                   </div>
                   <UniversitiesItemLocation>
@@ -190,35 +164,38 @@ export const Universities = () => {
                     </svg>
                     {university.location}
                   </UniversitiesItemLocation>
-                  <UniversitiesItemPrice>
-                    Ціна: <br /> {university.price}
-                  </UniversitiesItemPrice>
-                  <UniversitiesItemFeaturesContainer>
-                    <UniversitiesItemFeatures>
-                      <svg width="18px" height="18px">
-                        <use href={sprite + '#icon-type'} />
-                      </svg>
-                      {university.type}
-                    </UniversitiesItemFeatures>
-                    <UniversitiesItemFeatures>
-                      <svg width="18px" height="18px">
-                        <use href={sprite + '#icon-bakalavr'} />
-                      </svg>
-                      Бакалавр
-                    </UniversitiesItemFeatures>
-                    <UniversitiesItemFeatures>
-                      <svg width="20px" height="20px">
-                        <use href={sprite + '#icon-magistr'} />
-                      </svg>
-                      Магістр
-                    </UniversitiesItemFeatures>
-                    <UniversitiesItemFeatures>
-                      <svg width="19px" height="19px">
-                        <use href={sprite + '#icon-diplom'} />
-                      </svg>
-                      Диплом
-                    </UniversitiesItemFeatures>
-                  </UniversitiesItemFeaturesContainer>
+                  <UniversitiesItemPriceContainer>
+                    <UniversitiesItemPrice>
+                      Ціни: <br /> {university.price}
+                    </UniversitiesItemPrice>
+                    <UniversitiesItemFeaturesContainer>
+                      <UniversitiesItemFeatures>
+                        <svg width="18px" height="18px">
+                          <use href={sprite + '#icon-type'} />
+                        </svg>
+                        {university.type}
+                      </UniversitiesItemFeatures>
+                      <UniversitiesItemFeatures>
+                        <svg width="18px" height="18px">
+                          <use href={sprite + '#icon-bakalavr'} />
+                        </svg>
+                        Бакалавр
+                      </UniversitiesItemFeatures>
+                      <UniversitiesItemFeatures>
+                        <svg width="20px" height="20px">
+                          <use href={sprite + '#icon-magistr'} />
+                        </svg>
+                        Магістр
+                      </UniversitiesItemFeatures>
+                      <UniversitiesItemFeatures>
+                        <svg width="19px" height="19px">
+                          <use href={sprite + '#icon-diplom'} />
+                        </svg>
+                        Диплом
+                      </UniversitiesItemFeatures>
+                    </UniversitiesItemFeaturesContainer>
+                  </UniversitiesItemPriceContainer>
+
                   <UniversitiesItemBtnContainer>
                     <UniversitiesItemBtnLinkSite
                       to={university.website}

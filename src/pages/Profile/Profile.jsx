@@ -106,6 +106,7 @@ const Profile = () => {
       ...prevState,
       [name]: value,
     }));
+
     setIsModified(true);
   };
 
@@ -122,6 +123,7 @@ const Profile = () => {
       );
 
       toast.success('Профіль успішно оновлено!');
+      console.log(response.data);
       setProfileData(response.data);
       if (
         editedFields.username !== initialProfileData.username ||
@@ -155,7 +157,7 @@ const Profile = () => {
                             src={profileData.imageUrl}
                             alt="avatar"
                             className="rounded-circle"
-                            style={{ width: '150px' }}
+                            style={{ width: '150px', height: '150px' }}
                             fluid
                           />
                         ) : (

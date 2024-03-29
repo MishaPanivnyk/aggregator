@@ -3,10 +3,10 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { NavLink } from 'react-router-dom';
 export const ScrollableContainer = styled(PerfectScrollbar)`
-  height: 80px;
   margin-bottom: 32px;
   display: flex;
   justify-content: center;
+  overflow-y: scroll;
   .ps__rail-x {
     height: 5px;
     background-color: transparent;
@@ -83,12 +83,15 @@ export const UniversitiesTitle = styled.h2`
   }
 `;
 export const DirectionList = styled.ul`
+  width: 100%;
   display: flex;
   gap: 40px;
+
   align-items: center;
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
+    justify-content: center;
   }
 `;
 export const DirectionItem = styled.li`
@@ -134,7 +137,7 @@ export const UniversitiesList = styled.ul`
 export const UniversitiesItem = styled.li`
   padding: 25px;
   border-radius: 5px;
-  border: 1px solid #f0f0f0;
+  border: 3px solid #f0f0f0;
   background: #fff;
 
   @media only screen and (min-width: 768px) {
@@ -190,9 +193,13 @@ export const UniversitiesItemImg = styled.img`
   width: 50%;
   object-position: center;
   object-fit: contain;
+  margin-left: auto;
+  display: flex;
+  margin-right: auto;
   @media only screen and (min-width: 768px) {
     width: 10%;
     height: 100%;
+    margin: 0;
   }
   @media only screen and (min-width: 1024px) {
   }
@@ -211,6 +218,7 @@ export const UniversitiesItemRating = styled.p`
   }
   @media only screen and (min-width: 768px) {
     font-size: 18px;
+    width: 50px;
   }
   @media only screen and (min-width: 1024px) {
   }
@@ -232,6 +240,9 @@ export const UniversitiesItemReviews = styled.p`
   }
 `;
 export const UniversitiesItemLocation = styled.p`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
   & svg {
     margin-right: 10px;
   }
@@ -242,6 +253,7 @@ export const UniversitiesItemLocation = styled.p`
   font-weight: 700;
   line-height: 14px;
   @media only screen and (min-width: 768px) {
+    margin-bottom: 0px;
   }
   @media only screen and (min-width: 1024px) {
     width: 211px;
@@ -256,6 +268,7 @@ export const UniversitiesItemPrice = styled.p`
   line-height: 27px;
   @media only screen and (min-width: 768px) {
     font-size: 18px;
+    width: 72px;
   }
   @media only screen and (min-width: 1024px) {
     width: 169px;
@@ -274,6 +287,18 @@ export const UniversitiesItemBtnContainer = styled.div`
     margin-left: auto;
   }
 `;
+export const UniversitiesItemPriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  @media only screen and (min-width: 768px) {
+    gap: 50px;
+  }
+  @media only screen and (min-width: 1024px) {
+    gap: 100px;
+  }
+`;
 export const UniversitiesItemBtnLinkSite = styled(NavLink)`
   color: #fff;
   text-align: center;
@@ -284,6 +309,9 @@ export const UniversitiesItemBtnLinkSite = styled(NavLink)`
   line-height: 24px;
   border-radius: 100px;
   background: #01e45c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 7px 23px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 132px;
@@ -308,6 +336,9 @@ export const UniversitiesItemBtnLinkId = styled(NavLink)`
   font-weight: 700;
   line-height: 24px;
   border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid #2b2b2b;
   width: 132px;

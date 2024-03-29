@@ -120,6 +120,9 @@ export const Roulette = () => {
     <RouletteContainer>
       <Container>
         <RouletteTitlte>Рулетка Удачі</RouletteTitlte>
+        <RouletteDesc>
+          {selectedCity && ` Обране місто: ${selectedCity}`}
+        </RouletteDesc>
         <RouletteList>
           <MDBDropdown>
             <MDBDropdownToggle className="btn btn-primary dropdown-toggle">
