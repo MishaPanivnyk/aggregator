@@ -15,8 +15,7 @@ export const RouletteContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8f8f8;
-
+  background: #101010;
   .me-1 {
     padding: 10px;
     width: 100%;
@@ -44,35 +43,35 @@ export const RouletteSpinerContainer = styled.div`
   }
 `;
 export const RouletteTitlte = styled.h1`
-  color: #2b2b2b;
+  color: #d9d9d9;
   text-align: center;
-  font-family: 'Poppins';
+
+  font-family: 'Josefin Sans';
   font-size: 22px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   line-height: normal;
-  margin-bottom: 36px;
+
   @media only screen and (min-width: 768px) {
-    font-size: 30px;
-    margin-bottom: 24px;
+    font-size: 36px;
   }
   @media only screen and (min-width: 1024px) {
   }
 `;
 export const RouletteDesc = styled.p`
   margin-top: 20px;
-  color: #2b2b2b;
-  font-family: 'Open Sans';
+  color: #d9d9d9;
+  font-family: 'Josefin Sans';
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 36px;
   text-align: center;
   @media only screen and (min-width: 768px) {
     font-size: 16px;
     line-height: 28px;
-    margin-bottom: 0px;
+    margin-bottom: 24px;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -86,6 +85,7 @@ export const RouletteList = styled.div`
   @media only screen and (min-width: 768px) {
     flex-direction: initial;
     gap: 50px;
+    justify-content: flex-start;
   }
   @media only screen and (min-width: 1024px) {
   }
