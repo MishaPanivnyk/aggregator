@@ -20,6 +20,7 @@ import {
 } from './UniversitiesSwiper.styled';
 
 SwiperCore.use([Navigation, Pagination]);
+
 export const UniversitiesSwiper = () => {
   const [universities, setUniversities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -92,9 +93,15 @@ export const UniversitiesSwiper = () => {
               >
                 {universities.map((university, index) => (
                   <SwiperSlide key={index}>
-                    <ImgContainer>
-                      <img src={university.img} alt="Univesity" />
-                    </ImgContainer>
+                    <a
+                      href={university.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ImgContainer>
+                        <img src={university.img} alt="Univesity" />
+                      </ImgContainer>
+                    </a>
                   </SwiperSlide>
                 ))}
                 <NextButton className="swiper-button-next"></NextButton>
