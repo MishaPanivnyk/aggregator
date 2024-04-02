@@ -3,7 +3,7 @@ export const UniversitiesTitle = styled.h1`
   color: #2b2b2b;
   padding-top: 50px;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
