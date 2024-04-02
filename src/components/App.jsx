@@ -10,6 +10,8 @@ import Universities from 'pages/Universities/Universities';
 import { ToastContainer } from 'react-toastify';
 import RoulettePage from 'pages/Roulette/Roulette';
 import Search from 'pages/Search/Search';
+import University from 'pages/University/University';
+import Reviews from 'pages/Reviews/Reviews';
 
 export const App = () => {
   return (
@@ -21,6 +23,8 @@ export const App = () => {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<Blog />} />
           <Route path="/universities" element={<Universities />} />
+          <Route path="/universities/:id" element={<University />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/roulette" element={<RoulettePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/search" element={<Search />} />
