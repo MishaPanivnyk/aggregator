@@ -29,6 +29,9 @@ export const Link = styled(NavLink)`
     margin-left: 10px;
 
     @media only screen and (min-width: 768px) {
+      font-size: 0px;
+    }
+    @media only screen and (min-width: 1024px) {
       font-size: 16px;
     }
   }

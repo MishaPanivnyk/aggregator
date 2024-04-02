@@ -46,7 +46,7 @@ export const Header = () => {
             <Logo />
             {isDesktop && <Navigation />}
             <NavBox>
-              <Avatar />
+              <Avatar isClickable={true} width="34px" height="34px" />
               <Comparison />
               <Search />
               {isMobile && <BurgerMenu onClick={toggleMenu} />}
