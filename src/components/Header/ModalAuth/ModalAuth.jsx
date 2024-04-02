@@ -12,8 +12,11 @@ import {
   CloseButton,
 } from './ModalAuth.styled';
 import sprite from 'img/sprite.svg';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export const ModalAuth = ({ isOpen, onClose }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -24,6 +27,12 @@ export const ModalAuth = ({ isOpen, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData(prevData => ({
@@ -95,7 +104,6 @@ export const ModalAuth = ({ isOpen, onClose }) => {
     setIsInputFocused(true);
   };
 
-  // Додали обробник розфокусування для скидання стану isInputFocused
   const handleInputBlur = () => {
     setIsInputFocused(false);
   };
@@ -152,27 +160,82 @@ export const ModalAuth = ({ isOpen, onClose }) => {
             </>
           )}
           <ModalLabel>Password:</ModalLabel>
-          <ModalInput
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-          />
+          <div style={{ position: 'relative' }}>
+            <ModalInput
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+            />
+            {showPassword ? (
+              <FiEyeOff
+                onClick={toggleShowPassword}
+                style={{
+                  position: 'absolute',
+                  right: '20px',
+                  top: '30px',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  fontSize: '20px',
+                }}
+              />
+            ) : (
+              <FiEye
+                onClick={toggleShowPassword}
+                style={{
+                  position: 'absolute',
+                  right: '20px',
+                  top: '30px',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                  fontSize: '20px',
+                }}
+              />
+            )}
+          </div>
           {!isLogin && (
             <>
               <ModalLabel>Confirm Password:</ModalLabel>
-              <ModalInput
-                type="password"
-                name="confirmpassword"
-                value={formData.confirmpassword}
-                onChange={handleChange}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-              />
+              <div style={{ position: 'relative' }}>
+                <ModalInput
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                />
+                {showConfirmPassword ? (
+                  <FiEyeOff
+                    onClick={toggleShowConfirmPassword}
+                    style={{
+                      position: 'absolute',
+                      right: '20px',
+                      top: '30px',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      fontSize: '20px',
+                    }}
+                  />
+                ) : (
+                  <FiEye
+                    onClick={toggleShowConfirmPassword}
+                    style={{
+                      position: 'absolute',
+                      right: '20px',
+                      top: '30px',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      fontSize: '20px',
+                    }}
+                  />
+                )}
+              </div>
             </>
           )}
+
           <ModalBtn type="submit">{isLogin ? 'Login' : 'Sign Up'}</ModalBtn>
         </form>
         <ModalDesc>
