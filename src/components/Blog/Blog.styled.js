@@ -14,7 +14,7 @@ export const Section = styled.section`
 export const BlogTitle = styled.h2`
   color: #2b2b2b;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
@@ -126,7 +126,7 @@ export const BlogItemDesc = styled.p`
 
 export const BlogItemTitle = styled.h3`
   color: #2b2b2b;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 16px;
   font-style: normal;
   font-weight: 900;

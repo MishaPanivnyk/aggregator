@@ -14,7 +14,7 @@ export const ErrorSection = styled.section`
 export const ErrorTitle = styled.h1`
   color: #2b2b2b;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 26px;
   font-style: normal;
   font-weight: 900;

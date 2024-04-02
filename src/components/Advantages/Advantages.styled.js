@@ -14,7 +14,7 @@ export const AdvantagesContainer = styled.section`
 export const AdvantagesTitle = styled.h2`
   color: #2b2b2b;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
@@ -104,6 +104,7 @@ export const AdvantagesUkdImg = styled.img`
   @media only screen and (min-width: 768px) {
     width: 60%;
     justify-content: center;
+    margin-bottom: 20px;
   }
   @media only screen and (min-width: 1024px) {
     width: 700px;

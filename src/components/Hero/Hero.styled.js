@@ -16,7 +16,7 @@ export const HeroContainer = styled.section`
 
 export const HeroTitle = styled.h1`
   color: #2b2b2b;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 26px;
   font-style: normal;
   font-weight: 900;

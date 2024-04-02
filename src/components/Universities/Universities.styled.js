@@ -68,7 +68,7 @@ export const UniversitiesContainer = styled.section`
 export const UniversitiesTitle = styled.h2`
   color: #2b2b2b;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
@@ -148,7 +148,7 @@ export const UniversitiesItem = styled.li`
     align-items: center;
   }
   @media only screen and (min-width: 1024px) {
-    gap: 70px;
+    gap: 50px;
     height: 180px;
     padding: 15px 40px;
   }
@@ -268,9 +268,11 @@ export const UniversitiesItemPrice = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 27px;
+  margin-bottom: 10px;
   @media only screen and (min-width: 768px) {
     font-size: 18px;
     width: 72px;
+    margin-bottom: 0px;
   }
   @media only screen and (min-width: 1024px) {
     width: 169px;

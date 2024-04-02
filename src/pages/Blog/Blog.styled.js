@@ -46,12 +46,12 @@ export const BlogImg = styled.img`
   margin-bottom: 20px;
   @media only screen and (min-width: 768px) {
     display: flex;
-    width: 600px;
+    width: 400px;
     margin-right: auto;
     margin-left: auto;
   }
   @media only screen and (min-width: 1024px) {
-    width: 700px;
+    width: 500px;
     margin-right: auto;
     margin-left: auto;
   }

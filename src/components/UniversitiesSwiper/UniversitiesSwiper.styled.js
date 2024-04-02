@@ -17,7 +17,7 @@ export const UniversitiesContainer = styled.section`
 export const UniversitiesTitle = styled.h2`
   color: #2b2b2b;
   text-align: center;
-  font-family: 'Poppins';
+  font-family: 'Montserrat';
   font-size: 22px;
   font-style: normal;
   font-weight: 900;
