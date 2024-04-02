@@ -9,8 +9,8 @@ import {
   RouletteDesc,
   StyledMDBListGroupItem,
   WheelItem,
+  RouletteTitleLetter,
 } from './Roulette.styled';
-
 import {
   MDBModal,
   MDBModalDialog,
@@ -119,11 +119,13 @@ export const Roulette = () => {
   return (
     <RouletteContainer>
       <Container>
-        <RouletteTitlte>Рулетка Удачі</RouletteTitlte>
+        <RouletteTitlte>
+          <RouletteTitleLetter>Р</RouletteTitleLetter>улетка Удачі
+        </RouletteTitlte>
         <RouletteDesc>
           {selectedCity && ` Обране місто: ${selectedCity}`}
         </RouletteDesc>
-        <RouletteList>
+        <RouletteList style={{ position: 'relative' }}>
           <MDBDropdown>
             <MDBDropdownToggle className="btn btn-primary dropdown-toggle">
               Виберіть місто

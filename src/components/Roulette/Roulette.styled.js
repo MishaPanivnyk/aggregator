@@ -15,7 +15,14 @@ export const RouletteContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #101010;
+  background: black;
+  .dropdown {
+    @media only screen and (min-width: 768px) {
+      position: absolute;
+      top: 0;
+      left: -235px;
+    }
+  }
   .me-1 {
     padding: 10px;
     width: 100%;
@@ -90,3 +97,4 @@ export const RouletteList = styled.div`
   @media only screen and (min-width: 1024px) {
   }
 `;
+export const RouletteTitleLetter = styled.span``;
