@@ -109,7 +109,7 @@ export const CategoryItemTitle = styled.h3`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 `;
-export const CategoryItemLink = styled.a`
+export const CategoryItemLink = styled(NavLink)`
   color: #a6a6a6;
   font-family: 'Open Sans';
   font-size: 14px;
@@ -119,7 +119,17 @@ export const CategoryItemLink = styled.a`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 `;
-export const CopyrightDesc = styled(NavLink)`
+export const CopyrightDesc = styled.p`
+  color: #b5b5b5;
+  text-align: center;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+`;
+export const CopyrightDescTeam = styled(NavLink)`
   color: #b5b5b5;
   text-align: center;
   font-family: 'Open Sans';
@@ -129,10 +139,9 @@ export const CopyrightDesc = styled(NavLink)`
   line-height: 15px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  & span {
-    font-weight: 700;
-    text-decoration: underline;
-  }
+
+  font-weight: 700;
+  text-decoration: underline;
 `;
 export const FooterLogoContainer = styled.div`
   display: flex;

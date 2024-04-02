@@ -17,6 +17,7 @@ import {
   CopyrightDesc,
   CategoryContainer,
   SocItemLink,
+  CopyrightDescTeam,
 } from './Footer.styled';
 import logo from 'img/Logo-footer.png';
 import sprite from 'img/sprite.svg';
@@ -131,9 +132,15 @@ export const Footer = ({ onClick }) => {
                 </CategoryItemTitle>
                 {isOpen[1] && (
                   <CategoryBoxItemLink>
-                    <CategoryItemLink>УКД</CategoryItemLink>
-                    <CategoryItemLink>ПНУ</CategoryItemLink>
-                    <CategoryItemLink>ІФНТУНГ</CategoryItemLink>
+                    <CategoryItemLink to={'/universities/737b26a370a355e9'}>
+                      УКД
+                    </CategoryItemLink>
+                    <CategoryItemLink to={'/universities/f5e4b20ce01c4cbc'}>
+                      ПНУ
+                    </CategoryItemLink>
+                    <CategoryItemLink to={'/universities/ac7dd890c7c5b49d'}>
+                      ІФНТУНГ
+                    </CategoryItemLink>
                   </CategoryBoxItemLink>
                 )}
               </CategoryItem>
@@ -188,7 +195,9 @@ export const Footer = ({ onClick }) => {
         <Copyright>
           <CopyrightInfo>Угода користувача</CopyrightInfo>
           <CopyrightDesc>
-            © 2024. By ❤️ <span>VDOMA</span> . Всі права захищені
+            © 2024. By ❤️{' '}
+            <CopyrightDescTeam to="/roulette">VDOMA</CopyrightDescTeam>. Всі
+            права захищені
           </CopyrightDesc>
         </Copyright>
       </Container>
