@@ -5,7 +5,7 @@ import { ModalAuth } from '../ModalAuth/ModalAuth';
 import { LogoutDropdown } from '../LogoutDropdown/LogoutDropdown';
 import defaultAvatar from 'img/Avatar.jpg';
 
-export const Avatar = ({ onClick }) => {
+export const Avatar = ({ isClickable, onClick, width, height }) => {
   const [showModal, setShowModal] = useState(false);
   // eslint-disable-next-line
   const [profileData, setProfileData] = useState(null);
@@ -60,9 +60,11 @@ export const Avatar = ({ onClick }) => {
   }, []);
 
   const handleClick = () => {
-    setShowModal(!showModal);
-    if (typeof onClick === 'function') {
-      onClick();
+    if (isClickable) {
+      setShowModal(!showModal);
+      if (typeof onClick === 'function') {
+        onClick();
+      }
     }
   };
 
@@ -72,8 +74,8 @@ export const Avatar = ({ onClick }) => {
 
   return (
     <AvatarContainer>
-      <Button type="button" onClick={handleClick}>
-        <img src={imageUrl} alt="avatar" />
+      <Button type="button" onClick={handleClick} clickable={isClickable}>
+        <img src={imageUrl} alt="avatar" width={width} height={height} />
       </Button>
       {showModal &&
         (token ? (

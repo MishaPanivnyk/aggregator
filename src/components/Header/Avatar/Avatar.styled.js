@@ -7,8 +7,6 @@ export const Button = styled.button`
   background: transparent;
 
   & img {
-    width: 34px;
-    height: 34px;
     border-radius: 50%;
     object-fit: cover;
   }
