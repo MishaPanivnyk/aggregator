@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
 import sprite from 'img/sprite.svg';
 import { useLocation } from 'react-router-dom';
+import { MdCompareArrows } from 'react-icons/md';
 import { Container } from 'components/Container/Container';
 import {
   MDBPagination,
@@ -203,13 +204,19 @@ export const Universities = () => {
                     >
                       На сайт
                     </UniversitiesItemBtnLinkSite>
-                    <UniversitiesItemBtnLinkId>
+                    <UniversitiesItemBtnLinkId
+                      to={`/universities/${university.id}`}
+                    >
                       Детальніше
                     </UniversitiesItemBtnLinkId>
                     <UniversitiesItemaAddCompare>
-                      <svg width="12px" height="12px">
-                        <use href={sprite + '#icon-compare'} />
-                      </svg>
+                      <MdCompareArrows
+                        style={{
+                          marginRight: '5px',
+                          cursor: 'pointer',
+                          fontSize: '17px',
+                        }}
+                      />
                       Добавити в порівняння
                     </UniversitiesItemaAddCompare>
                   </UniversitiesItemBtnContainer>
