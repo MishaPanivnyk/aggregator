@@ -60,7 +60,7 @@ export const ModalBackdrop = styled.div`
 `;
 export const ModalTitle = styled.h2`
   text-align: center;
-  font-size: 32px;
+  font-size: 26px;
   font-style: normal;
   font-weight: 700;
   line-height: 60px;
@@ -86,14 +86,18 @@ export const ModalBtn = styled.button`
   font-weight: 600;
   padding: 15px;
   border-radius: 22px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
   border: 4px solid #01e45c;
-  width: 100%;
+  width: 48%;
   margin-top: 20px;
   cursor: pointer;
   background-color: #01e45c;
   box-shadow: 0px 4px 8px 0px rgba(16, 24, 40, 0.05);
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 15px;
+  justify-content: center;
   &:hover,
   &:focus {
     color: #fff;
@@ -111,8 +115,8 @@ export const ModalInput = styled.input`
 `;
 export const CloseButton = styled.a`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  top: 10px;
-  right: 15px;
+  top: 20px;
+  right: 25px;
   position: absolute;
   cursor: pointer;
   @media only screen and (min-width: 768px) {

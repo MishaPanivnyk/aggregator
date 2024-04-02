@@ -17,6 +17,10 @@ export const Link = styled(NavLink)`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   @media only screen and (min-width: 768px) {
     font-size: 14px;
+    margin-right: 0px;
+  }
+  @media only screen and (min-width: 1024px) {
+    margin-right: 20px;
   }
   &.active {
     color: #00d254;
