@@ -21,6 +21,7 @@ import {
   UniversitiesItemFeaturesContainer,
   UniversitiesItemFeatures,
   UniversitiesListContainer,
+  UniversitiesItemReviews,
 } from 'components/Universities/Universities.styled';
 
 const Search = () => {
@@ -87,9 +88,9 @@ const Search = () => {
                       </svg>
                       {university.rating}
                     </UniversitiesItemRating>
-                    {/* <UniversitiesItemReviews>
-                    Відгуки: {university.reviews.length}
-                  </UniversitiesItemReviews> */}
+                    <UniversitiesItemReviews>
+                      Відгуки: {university.reviewCount}
+                    </UniversitiesItemReviews>
                   </div>
                   <UniversitiesItemLocation>
                     <svg width="17px" height="17px">

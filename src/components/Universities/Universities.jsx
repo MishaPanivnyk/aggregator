@@ -156,7 +156,7 @@ export const Universities = () => {
                       {university.rating}
                     </UniversitiesItemRating>
                     <UniversitiesItemReviews>
-                      {/* Відгуки: {university.reviews.length} */}
+                      Відгуки: {university.reviewCount}
                     </UniversitiesItemReviews>
                   </div>
                   <UniversitiesItemLocation>
