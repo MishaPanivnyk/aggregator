@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ProfileContainer } from './Profile.styled';
-// import { Container } from 'components/Container/Container';
 import {
   MDBCol,
   MDBContainer,
@@ -20,11 +19,13 @@ import {
   MDBInput,
   MDBFile,
 } from 'mdb-react-ui-kit';
+import Alert from '@mui/material/Alert';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { FaPlusCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import defaultAvatar from 'img/Avatar.jpg';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
+import { Avatar } from 'components/Header/Avatar/Avatar';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -36,6 +37,8 @@ const Profile = () => {
     username: '',
     email: '',
   });
+  // eslint-disable-next-line
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const token = localStorage.getItem('token');
 
@@ -54,6 +57,7 @@ const Profile = () => {
 
           setProfileData(response.data);
           setInitialProfileData(response.data);
+          setAvatarUrl(response.data.imageUrl);
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error);
         }
@@ -85,21 +89,20 @@ const Profile = () => {
         );
 
         toast.success('Аватар успішно оновлено!');
-        setProfileData(response.data);
-        setBasicModal(false);
-
-        const updatedProfileData = {
-          ...profileData,
+        setProfileData(prevState => ({
+          ...prevState,
           imageUrl: response.data.imageUrl,
-        };
-        setProfileData(updatedProfileData);
+        }));
+        setBasicModal(false);
         setNewAvatar(null);
+        setAvatarUrl(response.data.imageUrl);
+
+        // Оновлення URL аватарки
       } catch (error) {
         toast.error('Виникла проблема з оновленням аватара!');
       }
     }
   };
-
   const handleInputChange = event => {
     const { name, value } = event.target;
     setEditedFields(prevState => ({
@@ -153,19 +156,23 @@ const Profile = () => {
                     <MDBCardBody className="text-center">
                       <div className="position-relative">
                         {profileData.imageUrl ? (
-                          <img
+                          <Avatar
+                            key={profileData.imageUrl}
                             src={profileData.imageUrl}
                             alt="avatar"
                             className="rounded-circle"
-                            style={{ width: '150px', height: '150px' }}
+                            width="150px"
+                            height="150px"
                             fluid
                           />
                         ) : (
-                          <img
+                          <Avatar
+                            key={defaultAvatar}
                             src={defaultAvatar}
                             alt="default avatar"
                             className="rounded-circle"
-                            style={{ width: '150px' }}
+                            width="150px"
+                            height="150px"
                             fluid
                           />
                         )}
@@ -224,14 +231,48 @@ const Profile = () => {
                     <MDBCardBody>
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Full Name</MDBCardText>
+                          <MDBCardText>First Name</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9">
-                          <MDBCardText className="text-muted">
-                            Misha Panivnyk
-                          </MDBCardText>
+                          <MDBInput
+                            type="text"
+                            name="firstName"
+                            value={
+                              editedFields.firstName || profileData.firstName
+                            }
+                            onChange={handleInputChange}
+                            placeholder="Enter your first name"
+                          />
                         </MDBCol>
                       </MDBRow>
+                      <MDBRow>
+                        <MDBCol sm="3">
+                          <MDBCardText
+                            style={{
+                              marginTop: '20px',
+                            }}
+                          >
+                            Last Name
+                          </MDBCardText>
+                        </MDBCol>
+                        <MDBCol
+                          sm="9"
+                          style={{
+                            marginTop: '20px',
+                          }}
+                        >
+                          <MDBInput
+                            type="text"
+                            name="lastName"
+                            value={
+                              editedFields.lastName || profileData.lastName
+                            }
+                            onChange={handleInputChange}
+                            placeholder="Enter your last name"
+                          />
+                        </MDBCol>
+                      </MDBRow>
+
                       <hr />
                       <MDBRow>
                         <MDBCol sm="3">
@@ -267,11 +308,25 @@ const Profile = () => {
                       <hr />
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText>Creator</MDBCardText>
+                          <MDBCardText
+                            style={{
+                              marginTop: '10px',
+                            }}
+                          >
+                            Creator
+                          </MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9">
-                          <MDBCardText className="text-muted">
+                          <MDBCardText className="text-muted text-muted2">
                             {profileData.isCreator ? 'Yes' : 'No'}
+                            <Alert
+                              variant="outlined"
+                              severity="info"
+                              style={{ width: '100%' }}
+                            >
+                              Для отримання прав написання блогів, зверніться
+                              <a href="https://t.me/diwwmix"> сюди</a>
+                            </Alert>
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
