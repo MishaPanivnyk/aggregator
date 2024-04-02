@@ -21,13 +21,12 @@ import {
   UniversitiesItemFeaturesContainer,
   UniversitiesItemFeatures,
   UniversitiesListContainer,
-  // Додали новий компонент для введення пошукового запиту
 } from 'components/Universities/Universities.styled';
 
 const Search = () => {
   // eslint-disable-next-line
   const location = useLocation();
-  const [searchQuery, setSearchQuery] = useState(''); // Стан для зберігання пошукового запиту
+  const [searchQuery, setSearchQuery] = useState('');
   const [universities, setUniversities] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -39,6 +38,8 @@ const Search = () => {
           `${process.env.REACT_APP_BACKEND_URL}/universities/search/?query=${searchQuery}`
         );
         const data = response.data;
+
+        data.sort((a, b) => b.rating - a.rating);
         setUniversities(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -97,7 +98,7 @@ const Search = () => {
                     {university.location}
                   </UniversitiesItemLocation>
                   <UniversitiesItemPrice>
-                    Ціни: <br /> {university.price}
+                    {university.universityName}
                   </UniversitiesItemPrice>
                   <UniversitiesItemFeaturesContainer>
                     <UniversitiesItemFeatures>
@@ -132,7 +133,9 @@ const Search = () => {
                     >
                       На сайт
                     </UniversitiesItemBtnLinkSite>
-                    <UniversitiesItemBtnLinkId>
+                    <UniversitiesItemBtnLinkId
+                      to={`/universities/${university.id}`}
+                    >
                       Детальніше
                     </UniversitiesItemBtnLinkId>
                     <UniversitiesItemaAddCompare>
