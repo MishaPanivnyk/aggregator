@@ -3,7 +3,14 @@ import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
 import { useLocation } from 'react-router-dom';
 import { Container } from 'components/Container/Container';
-import { SearchContainer, SearchInput, SearchIcon } from './Search.styled';
+import {
+  SearchContainer,
+  SearchInput,
+  SearchIcon,
+  UniversitiesItemName,
+  ErrorMessage,
+} from './Search.styled';
+import { ErrorIcon } from 'components/Error/Error.styled';
 import sprite from 'img/sprite.svg';
 import {
   UniversitiesContainer,
@@ -13,7 +20,6 @@ import {
   UniversitiesItemImg,
   UniversitiesItemRating,
   UniversitiesItemLocation,
-  UniversitiesItemPrice,
   UniversitiesItemBtnContainer,
   UniversitiesItemBtnLinkSite,
   UniversitiesItemBtnLinkId,
@@ -74,6 +80,13 @@ const Search = () => {
           <UniversitiesList>
             {loading ? (
               <Loader />
+            ) : universities.length === 0 ? (
+              <ErrorMessage>
+                <ErrorIcon>
+                  <use href={sprite + '#icon-Error'} />
+                </ErrorIcon>
+                <p>Нічого не знайдено!</p>
+              </ErrorMessage>
             ) : (
               universities.map((university, index) => (
                 <UniversitiesItem key={index}>
@@ -86,7 +99,7 @@ const Search = () => {
                       <svg width="14px" height="14px">
                         <use href={sprite + '#icon-star'} />
                       </svg>
-                      {university.rating}
+                      {Math.round(university.rating * 10) / 10}
                     </UniversitiesItemRating>
                     <UniversitiesItemReviews>
                       Відгуки: {university.reviewCount}
@@ -98,9 +111,9 @@ const Search = () => {
                     </svg>
                     {university.location}
                   </UniversitiesItemLocation>
-                  <UniversitiesItemPrice>
+                  <UniversitiesItemName>
                     {university.universityName}
-                  </UniversitiesItemPrice>
+                  </UniversitiesItemName>
                   <UniversitiesItemFeaturesContainer>
                     <UniversitiesItemFeatures>
                       <svg width="18px" height="18px">
