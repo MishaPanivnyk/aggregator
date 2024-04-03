@@ -3,7 +3,6 @@ import axios from 'axios';
 import Rating from '@mui/material/Rating';
 import { Link } from 'react-router-dom';
 import {
-  UniversityReviewsContainer,
   UniversityReviewsItem,
   UniversityReviewsComment,
   UniversityReviewsAvatar,
@@ -66,8 +65,9 @@ const Reviews = () => {
   useEffect(() => {
     const fetchUniversities = async () => {
       try {
+        const lastTenReviews = reviews.slice(-10).reverse();
         const universitiesData = await Promise.all(
-          reviews.map(review =>
+          lastTenReviews.map(review =>
             axios.get(
               `${process.env.REACT_APP_BACKEND_URL}/universities/${review.university}`
             )
@@ -81,7 +81,6 @@ const Reviews = () => {
     };
     fetchUniversities();
   }, [reviews]);
-
   const UniversityInfo = ({ universityId }) => {
     const university = universities.find(u => u.id === universityId);
     if (!university) return null;
@@ -103,43 +102,41 @@ const Reviews = () => {
     <main>
       <ReviewsContainer>
         <Container>
-          <ReviewsTitle>Відгуки</ReviewsTitle>
+          <ReviewsTitle>Нещодавні відгуки</ReviewsTitle>
           {loadingReviews || loadingUniversity ? (
             <Loader />
           ) : (
             reviews
-              .slice(0)
+              .slice(-10)
               .reverse()
               .map((review, index) => {
                 const user = users.find(user => user.id === review.user);
                 if (!user) return null;
 
                 return (
-                  <UniversityReviewsContainer key={index}>
-                    <UniversityReviewsItem>
-                      <UniversityInfo universityId={review.university} />
-                      <UniversityReviewsAvatarContainer>
-                        <UniversityReviewsAvatar
-                          src={`https://res.cloudinary.com/dvtiwucbq/${user.imageUrl}`}
-                          alt={user.username}
-                        />
-                        <UniversityReviewsUser>{`Користувач: ${user.username}`}</UniversityReviewsUser>
-                      </UniversityReviewsAvatarContainer>
-                      <UniversityReviewsAvatarContainer>
-                        <Rating
-                          name={`rating-${index}`}
-                          value={review.rating}
-                          readOnly
-                        />
-                        <UniversityReviewsDate>
-                          {formatDate(review.created_at)}
-                        </UniversityReviewsDate>
-                      </UniversityReviewsAvatarContainer>
-                      <UniversityReviewsComment>
-                        {review.comment}
-                      </UniversityReviewsComment>
-                    </UniversityReviewsItem>
-                  </UniversityReviewsContainer>
+                  <UniversityReviewsItem key={index}>
+                    <UniversityInfo universityId={review.university} />
+                    <UniversityReviewsAvatarContainer>
+                      <UniversityReviewsAvatar
+                        src={`https://res.cloudinary.com/dvtiwucbq/${user.imageUrl}`}
+                        alt={user.username}
+                      />
+                      <UniversityReviewsUser>{`Користувач: ${user.username}`}</UniversityReviewsUser>
+                    </UniversityReviewsAvatarContainer>
+                    <UniversityReviewsAvatarContainer>
+                      <Rating
+                        name={`rating-${index}`}
+                        value={review.rating}
+                        readOnly
+                      />
+                      <UniversityReviewsDate>
+                        {formatDate(review.created_at)}
+                      </UniversityReviewsDate>
+                    </UniversityReviewsAvatarContainer>
+                    <UniversityReviewsComment>
+                      {review.comment}
+                    </UniversityReviewsComment>
+                  </UniversityReviewsItem>
                 );
               })
           )}
