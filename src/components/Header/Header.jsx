@@ -67,8 +67,8 @@ export const Header = () => {
                 <Link to="/reviews" onClick={toggleMenu}>
                   Відгуки
                 </Link>
-                <Link to="/roulette" onClick={toggleMenu}>
-                  Рулетка
+                <Link to="/leaders" onClick={toggleMenu}>
+                  Лідери
                 </Link>
                 <Link to="/blogs" onClick={toggleMenu}>
                   Блог
