@@ -204,9 +204,10 @@ export const UniversityReviewsBtnContainer = styled.div`
   @media only screen and (min-width: 1024px) {
   }
 `;
-export const UniversityReviewsContainer = styled.ul`
+export const UniversityReviewsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  list-style: none;
   gap: 20px;
   @media only screen and (min-width: 768px) {
   }
@@ -214,8 +215,9 @@ export const UniversityReviewsContainer = styled.ul`
   }
 `;
 export const UniversityReviewsItem = styled.li`
+  list-style: none;
   border-radius: 5px;
-  background: #f6f7ff;
+  background: white;
   padding: 30px 20px;
   border: 2px solid #f0f0f0;
   margin-bottom: 10px;

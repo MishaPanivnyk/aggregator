@@ -53,6 +53,7 @@ export const UniversityId = () => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [users, setUsers] = useState([]);
+  const [lastReviewTime, setLastReviewTime] = useState(null);
 
   const token = localStorage.getItem('token');
 
@@ -119,9 +120,22 @@ export const UniversityId = () => {
 
   const submitReview = async () => {
     if (!token) {
-      // Якщо користувач неавторизований, відобразити повідомлення про необхідність авторизації
       toast.error('Для написання відгуку потрібно увійти в систему.');
       return;
+    }
+
+    if (lastReviewTime) {
+      const currentTime = new Date();
+      const timeDiff = currentTime - new Date(lastReviewTime);
+      const minutesPassed = Math.floor(timeDiff / 1000 / 60);
+      const timeLeft = 10 - minutesPassed;
+
+      if (timeLeft > 0) {
+        toast.error(
+          `Зачекайте ще ${timeLeft} хвилин перед написанням наступного відгуку.`
+        );
+        return;
+      }
     }
 
     try {
@@ -146,6 +160,7 @@ export const UniversityId = () => {
       setReviews(response.data);
       setReview('');
       setRating(0);
+      setLastReviewTime(new Date());
     } catch (error) {
       toast.error('Виникла помилка при надсиланні відгуку!');
       console.error('Error submitting review: ', error);
@@ -183,7 +198,7 @@ export const UniversityId = () => {
                   <svg width="14px" height="14px">
                     <use href={sprite + '#icon-star'} />
                   </svg>
-                  {university.rating}
+                  {Math.round(university.rating * 10) / 10}
                 </span>
               </UniversityItemText>
               <UniversityItemText>
@@ -304,7 +319,7 @@ export const UniversityId = () => {
               sx={{
                 width: '100%',
                 borderRadius: '5px',
-                background: '#f6f7ff',
+                background: '#fff',
                 marginBottom: '10px',
               }}
             />
