@@ -10,7 +10,7 @@ import {
   MDBPaginationItem,
   MDBPaginationLink,
 } from 'mdb-react-ui-kit';
-
+import { useMediaQuery } from 'react-responsive';
 import {
   UniversitiesContainer,
   UniversitiesTitle,
@@ -39,6 +39,9 @@ import {
 export const Universities = () => {
   const location = useLocation();
   const isUniversitiesPage = location.pathname === '/universities';
+  const isTablet = useMediaQuery({
+    query: '(min-width: 768px) ',
+  });
   // eslint-disable-next-line
   const [popularDirections, setPopularDirections] = useState([
     'IT',
@@ -153,7 +156,7 @@ export const Universities = () => {
                       <svg width="14px" height="14px">
                         <use href={sprite + '#icon-star'} />
                       </svg>
-                      {university.rating}
+                      {Math.round(university.rating * 10) / 10}
                     </UniversitiesItemRating>
                     <UniversitiesItemReviews>
                       Відгуки: {university.reviewCount}
@@ -227,7 +230,7 @@ export const Universities = () => {
         </UniversitiesListContainer>
         {isUniversitiesPage
           ? universities.length > universitiesPerPage && (
-              <MDBPagination size="lg" className="mb-0">
+              <MDBPagination size={isTablet ? 'lg' : 'sm'} className="mb-0">
                 {Array.from(
                   {
                     length: Math.ceil(
