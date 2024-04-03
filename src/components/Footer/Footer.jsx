@@ -161,9 +161,21 @@ export const Footer = ({ onClick }) => {
                 </CategoryItemTitle>
                 {isOpen[2] && (
                   <CategoryBoxItemLink>
-                    <CategoryItemLink>УКД</CategoryItemLink>
-                    <CategoryItemLink>ПНУ</CategoryItemLink>
-                    <CategoryItemLink>ІФНТУНГ</CategoryItemLink>
+                    <CategoryItemLink
+                      to={'/universities/737b26a370a355e9#review'}
+                    >
+                      УКД
+                    </CategoryItemLink>
+                    <CategoryItemLink
+                      to={'/universities/f5e4b20ce01c4cbc#review'}
+                    >
+                      ПНУ
+                    </CategoryItemLink>
+                    <CategoryItemLink
+                      to={'/universities/ac7dd890c7c5b49d#review'}
+                    >
+                      ІФНТУНГ
+                    </CategoryItemLink>
                   </CategoryBoxItemLink>
                 )}
               </CategoryItem>
