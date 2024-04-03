@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ProfileContainer } from './Profile.styled';
+import { ProfileContainer, DeleteIcon } from './Profile.styled';
 import {
   MDBCol,
   MDBContainer,
@@ -19,28 +19,50 @@ import {
   MDBInput,
   MDBFile,
 } from 'mdb-react-ui-kit';
+import sprite from 'img/sprite.svg';
 import Alert from '@mui/material/Alert';
+import Rating from '@mui/material/Rating';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { FaPlusCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import defaultAvatar from 'img/Avatar.jpg';
 import ErrorPage from 'pages/ErrorPage/ErrorPage';
+import { Link } from 'react-router-dom';
 import { Avatar } from 'components/Header/Avatar/Avatar';
-
+import {
+  UniversityReviewsContainer,
+  UniversityReviewsItem,
+  UniversityReviewsComment,
+  UniversityReviewsAvatarContainer,
+  UniversityReviewsDate,
+} from '../../components/University/University.styled';
+import {
+  UniversityInfoContainer,
+  UniversitiesItemImgUsers,
+} from '../Reviews/Reviews.styled';
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
   const [newAvatar, setNewAvatar] = useState(null);
   const [basicModal, setBasicModal] = useState(false);
   const [isModified, setIsModified] = useState(false);
+  const [userReviews, setUserReviews] = useState([]);
   const [initialProfileData, setInitialProfileData] = useState(null);
-  const [editedFields, setEditedFields] = useState({
-    username: '',
-    email: '',
-  });
+  const [editedFields, setEditedFields] = useState({});
+  const [universities, setUniversities] = useState([]);
+  const [loadingUniversity, setLoadingUniversity] = useState(true);
+
   // eslint-disable-next-line
   const [avatarUrl, setAvatarUrl] = useState('');
 
   const token = localStorage.getItem('token');
+
+  const formatDate = isoDate => {
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -66,6 +88,29 @@ const Profile = () => {
 
     fetchProfileData();
   }, [token]);
+
+  useEffect(() => {
+    const fetchUserReviews = async () => {
+      if (profileData && profileData.id) {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/api/profile/${profileData.id}/reviews/`,
+            {
+              headers: {
+                Authorization: `token ${token}`,
+              },
+            }
+          );
+          setUserReviews(response.data);
+        } catch (error) {
+          console.error('Error fetching user reviews:', error);
+        }
+      }
+    };
+
+    fetchUserReviews();
+    // eslint-disable-next-line
+  }, [profileData]);
 
   const handleFileChange = event => {
     setNewAvatar(event.target.files[0]);
@@ -105,19 +150,34 @@ const Profile = () => {
   };
   const handleInputChange = event => {
     const { name, value } = event.target;
-    setEditedFields(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
 
-    setIsModified(true);
+    // Перевіряємо, чи змінилося значення поля перед оновленням editedFields
+    if (editedFields[name] !== value) {
+      setEditedFields(prevState => ({
+        ...prevState,
+        [name]: value,
+      }));
+      setIsModified(true);
+    }
   };
 
   const handleEditSubmit = async () => {
     try {
+      const updatedFields = {};
+
+      Object.keys(editedFields).forEach(key => {
+        if (editedFields[key] !== initialProfileData[key]) {
+          updatedFields[key] = editedFields[key];
+        }
+      });
+
+      if (Object.keys(updatedFields).length === 0) {
+        return;
+      }
+
       const response = await axios.patch(
         `${process.env.REACT_APP_BACKEND_URL}/api/profile/edit/`,
-        editedFields,
+        updatedFields,
         {
           headers: {
             Authorization: `token ${token}`,
@@ -128,16 +188,49 @@ const Profile = () => {
       toast.success('Профіль успішно оновлено!');
       console.log(response.data);
       setProfileData(response.data);
-      if (
-        editedFields.username !== initialProfileData.username ||
-        editedFields.email !== initialProfileData.email
-      ) {
-        setIsModified(true);
-      } else {
-        setIsModified(false);
-      }
+      setIsModified(false);
+      setInitialProfileData(response.data);
     } catch (error) {
       toast.error('Виникла проблема з оновленням профілю!');
+    }
+  };
+
+  useEffect(() => {
+    const fetchUniversities = async () => {
+      try {
+        const universitiesData = await Promise.all(
+          userReviews.map(review =>
+            axios.get(
+              `${process.env.REACT_APP_BACKEND_URL}/universities/${review.university}`
+            )
+          )
+        );
+        setUniversities(universitiesData.map(response => response.data));
+        setLoadingUniversity(false);
+      } catch (error) {
+        console.error('Error fetching universities:', error);
+      }
+    };
+    fetchUniversities();
+  }, [userReviews]);
+
+  const handleDeleteReview = async reviewId => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/review/${reviewId}/delete`,
+        {
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }
+      );
+      setUserReviews(prevReviews =>
+        prevReviews.filter(review => review.id !== reviewId)
+      );
+
+      toast.success('Відгук успішно видалено!');
+    } catch (error) {
+      toast.error('Виникла проблема з видаленням відгуку!');
     }
   };
 
@@ -147,7 +240,6 @@ const Profile = () => {
     <main>
       {token ? (
         <ProfileContainer>
-          {/* <Container> */}
           {profileData && (
             <MDBContainer className="py-5">
               <MDBRow>
@@ -222,7 +314,9 @@ const Profile = () => {
                       <p className="text-muted mb-1">
                         {profileData.isCreator ? 'Creator' : 'User'}
                       </p>
-                      <p className="text-muted mb-4">Misha Panivnyk</p>
+                      <p className="text-muted mb-4">
+                        {profileData.first_name} {profileData.last_name}
+                      </p>
                     </MDBCardBody>
                   </MDBCard>
                 </MDBCol>
@@ -236,9 +330,9 @@ const Profile = () => {
                         <MDBCol sm="9">
                           <MDBInput
                             type="text"
-                            name="firstName"
+                            name="first_name"
                             value={
-                              editedFields.firstName || profileData.firstName
+                              editedFields.first_name || profileData.first_name
                             }
                             onChange={handleInputChange}
                             placeholder="Enter your first name"
@@ -263,9 +357,9 @@ const Profile = () => {
                         >
                           <MDBInput
                             type="text"
-                            name="lastName"
+                            name="last_name"
                             value={
-                              editedFields.lastName || profileData.lastName
+                              editedFields.last_name || profileData.last_name
                             }
                             onChange={handleInputChange}
                             placeholder="Enter your last name"
@@ -308,26 +402,23 @@ const Profile = () => {
                       <hr />
                       <MDBRow>
                         <MDBCol sm="3">
-                          <MDBCardText
-                            style={{
-                              marginTop: '10px',
-                            }}
-                          >
-                            Creator
-                          </MDBCardText>
+                          <MDBCardText>Creator</MDBCardText>
                         </MDBCol>
                         <MDBCol sm="9">
-                          <MDBCardText className="text-muted text-muted2">
-                            {profileData.isCreator ? 'Yes' : 'No'}
+                          {profileData.isCreator ? (
+                            <MDBCardText className="text-muted text-muted2">
+                              Yes
+                            </MDBCardText>
+                          ) : (
                             <Alert
                               variant="outlined"
                               severity="info"
                               style={{ width: '100%' }}
                             >
-                              Для отримання прав написання блогів, зверніться
-                              <a href="https://t.me/diwwmix"> сюди</a>
+                              Для отримання прав написання блогів, зверніться{' '}
+                              <a href="https://t.me/diwwmix">сюди</a>
                             </Alert>
-                          </MDBCardText>
+                          )}
                         </MDBCol>
                       </MDBRow>
                       <hr />
@@ -342,7 +433,7 @@ const Profile = () => {
                   </MDBCard>
 
                   <MDBRow>
-                    <MDBCol md="6">
+                    <MDBCol md="12">
                       <MDBCard className="mb-4 mb-md-0">
                         <MDBCardBody>
                           <MDBCardText
@@ -355,6 +446,68 @@ const Profile = () => {
                             Користувача
                           </MDBCardText>
                           <hr />
+                          <div>
+                            {userReviews
+                              .slice()
+                              .reverse()
+                              .map((review, index) => (
+                                <UniversityReviewsContainer key={review.id}>
+                                  <UniversityReviewsItem
+                                    style={{ position: 'relative' }}
+                                  >
+                                    {loadingUniversity ? (
+                                      <div>Loading university info...</div>
+                                    ) : (
+                                      <div>
+                                        {universities[index] && (
+                                          <UniversityInfoContainer className="university-info-container">
+                                            <Link
+                                              to={`/universities/${universities[index].id}`}
+                                            >
+                                              <UniversitiesItemImgUsers
+                                                src={universities[index].img}
+                                                alt={
+                                                  universities[index]
+                                                    .universityName
+                                                }
+                                              />
+                                            </Link>
+                                            <p>
+                                              {
+                                                universities[index]
+                                                  .universityName
+                                              }
+                                            </p>
+                                          </UniversityInfoContainer>
+                                        )}
+                                      </div>
+                                    )}
+                                    <UniversityReviewsAvatarContainer>
+                                      <Rating
+                                        name={`rating-${review.id}`}
+                                        value={review.rating}
+                                        readOnly
+                                      />
+                                      <UniversityReviewsDate>
+                                        {formatDate(review.created_at)}
+                                      </UniversityReviewsDate>
+                                    </UniversityReviewsAvatarContainer>
+                                    <UniversityReviewsComment>
+                                      {review.comment}
+                                    </UniversityReviewsComment>
+                                    <DeleteIcon
+                                      onClick={() =>
+                                        handleDeleteReview(review.id)
+                                      }
+                                    >
+                                      <svg width="30px" height="30px">
+                                        <use href={sprite + '#icon-close'} />
+                                      </svg>
+                                    </DeleteIcon>
+                                  </UniversityReviewsItem>
+                                </UniversityReviewsContainer>
+                              ))}
+                          </div>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBCol>
@@ -363,7 +516,6 @@ const Profile = () => {
               </MDBRow>
             </MDBContainer>
           )}
-          {/* </Container> */}
         </ProfileContainer>
       ) : (
         <ErrorPage />
