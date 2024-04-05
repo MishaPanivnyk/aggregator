@@ -53,7 +53,7 @@ export const UniversityId = () => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [users, setUsers] = useState([]);
-  const [lastReviewTime, setLastReviewTime] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -124,24 +124,12 @@ export const UniversityId = () => {
       return;
     }
 
-    if (lastReviewTime) {
-      const currentTime = new Date();
-      const timeDiff = currentTime - new Date(lastReviewTime);
-      const minutesPassed = Math.floor(timeDiff / 1000 / 60);
-      const timeLeft = 10 - minutesPassed;
-
-      if (timeLeft > 0) {
-        toast.error(
-          `Зачекайте ще ${timeLeft} хвилин перед написанням наступного відгуку.`
-        );
-        return;
-      }
-    }
     if (rating === 0) {
       toast.error('Рейтинг не може бути нульовим.');
       return;
     }
     try {
+      setIsSubmitting(true);
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/create-review/`,
         {
@@ -163,10 +151,11 @@ export const UniversityId = () => {
       setReviews(response.data);
       setReview('');
       setRating(0);
-      setLastReviewTime(new Date());
     } catch (error) {
       toast.error('Виникла помилка при надсиланні відгуку!');
       console.error('Error submitting review: ', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
   if (loading) {
@@ -333,7 +322,11 @@ export const UniversityId = () => {
                 value={rating}
                 onChange={handleRatingChange}
               />
-              <Button variant="contained" onClick={submitReview}>
+              <Button
+                variant="contained"
+                disabled={isSubmitting}
+                onClick={submitReview}
+              >
                 Відправити
               </Button>
             </UniversityReviewsBtnContainer>
