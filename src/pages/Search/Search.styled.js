@@ -47,7 +47,7 @@ export const ErrorMessage = styled.div`
   color: #2b2b2b;
   text-align: center;
   font-family: 'Montserrat';
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
