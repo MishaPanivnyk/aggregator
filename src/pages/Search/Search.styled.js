@@ -30,18 +30,16 @@ export const SearchIcon = styled(CiSearch)`
 export const UniversitiesItemName = styled.p`
   color: #2b2b2b;
   font-family: 'Open Sans';
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
   line-height: 27px;
   margin-bottom: 10px;
   @media only screen and (min-width: 768px) {
-    font-size: 14px;
     width: 88px;
     margin-bottom: 0px;
   }
   @media only screen and (min-width: 1024px) {
-    font-size: 18px;
     width: 169px;
   }
 `;
