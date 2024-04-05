@@ -137,7 +137,10 @@ export const UniversityId = () => {
         return;
       }
     }
-
+    if (rating === 0) {
+      toast.error('Рейтинг не може бути нульовим.');
+      return;
+    }
     try {
       await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/create-review/`,
