@@ -12,6 +12,8 @@ import RoulettePage from 'pages/Roulette/Roulette';
 import Search from 'pages/Search/Search';
 import University from 'pages/University/University';
 import Reviews from 'pages/Reviews/Reviews';
+import Comparison from 'pages/Comparison/Comparison';
+import Leaders from 'pages/Leaders/Leaders';
 
 export const App = () => {
   return (
@@ -25,8 +27,10 @@ export const App = () => {
           <Route path="/universities" element={<Universities />} />
           <Route path="/universities/:id" element={<University />} />
           <Route path="/reviews" element={<Reviews />} />
+          <Route path="/leaders" element={<Leaders />} />
           <Route path="/roulette" element={<RoulettePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/comparison" element={<Comparison />} />
           <Route path="/search" element={<Search />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
