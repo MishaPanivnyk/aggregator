@@ -35,6 +35,7 @@ import {
   UniversitiesItemFeatures,
   UniversitiesItemPriceContainer,
 } from './Universities.styled';
+import { toast } from 'react-toastify';
 
 export const Universities = () => {
   const location = useLocation();
@@ -109,6 +110,30 @@ export const Universities = () => {
     setSelectedDirection(direction);
 
     setCurrentPage(1);
+  };
+
+  const addToComparison = async universityId => {
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/comparison/compare/`,
+        {
+          university_id: universityId,
+        },
+        {
+          headers: {
+            Authorization: `token ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      toast.success('Успішно добавлено в порівняння!');
+    } catch (error) {
+      if (error.response.status === 409) {
+        toast.error('Досягнута максимальна кількість університетів!');
+      } else {
+        console.error('Error removing university from comparison:', error);
+        toast.error('Авторизуйтесь!');
+      }
+    }
   };
 
   return (
@@ -212,7 +237,9 @@ export const Universities = () => {
                     >
                       Детальніше
                     </UniversitiesItemBtnLinkId>
-                    <UniversitiesItemaAddCompare>
+                    <UniversitiesItemaAddCompare
+                      onClick={() => addToComparison(university.id)}
+                    >
                       <MdCompareArrows
                         style={{
                           marginRight: '5px',
