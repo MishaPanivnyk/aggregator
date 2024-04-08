@@ -15,9 +15,18 @@ export const Link = styled(NavLink)`
     font-style: normal;
     font-weight: 900;
     line-height: normal;
-    top: 4px;
-    right: 4px;
+    top: -17px;
+    right: -15px;
+
     text-align: center;
+    @media only screen and (min-width: 768px) {
+      top: 4px;
+      right: 4px;
+    }
+    @media only screen and (min-width: 1024px) {
+      top: 4px;
+      right: 4px;
+    }
   }
   @media only screen and (min-width: 768px) {
     padding: 21px;
