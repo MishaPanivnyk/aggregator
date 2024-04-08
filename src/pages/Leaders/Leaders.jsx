@@ -9,7 +9,6 @@ import {
   LeaderItemTitle,
   LeaderItemDesc,
 } from './Leaders.styled';
-import { Container } from 'components/Container/Container';
 
 const Leaders = () => {
   const [leaders, setLeaders] = useState([]);
