@@ -105,7 +105,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}reset-password/${uidb64}/${token}/`,
+        `${process.env.REACT_APP_BACKEND_URL}/reset-password/${uidb64}/${token}/`,
         {
           password,
         }
