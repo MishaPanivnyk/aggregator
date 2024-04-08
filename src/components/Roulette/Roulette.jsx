@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container } from 'components/Container/Container';
 import {
@@ -8,7 +8,6 @@ import {
   RouletteTitlte,
   RouletteDesc,
   StyledMDBListGroupItem,
-  WheelItem,
   RouletteTitleLetter,
 } from './Roulette.styled';
 import {
@@ -26,6 +25,8 @@ import {
 } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { Loader } from 'components/Loader/Loader';
+import RoulettePro from 'react-roulette-pro';
+import 'react-roulette-pro/dist/index.css';
 
 export const Roulette = () => {
   const [mustSpin, setMustSpin] = useState(false);
@@ -59,44 +60,25 @@ export const Roulette = () => {
 
   const handleStopSpinning = () => {
     setMustSpin(false);
-    if (
-      !isNaN(prizeNumber) &&
-      filteredUniversities.length > 0 &&
-      prizeNumber >= 0 &&
-      prizeNumber < filteredUniversities.length
-    ) {
-      setWinner(filteredUniversities[prizeNumber].universityName);
+    if (filteredUniversities.length > 0) {
+      const winningIndex = prizeNumber % filteredUniversities.length;
+      setWinner(filteredUniversities[winningIndex].universityName);
     }
   };
+
   const handleCloseModal = () => {
     setWinner(null);
   };
 
   const handleCitySelect = city => {
     setSelectedCity(city);
-  };
-
-  const generateRandomColor = () => {
-    const colors = [
-      '#FF5733',
-      '#33FF57',
-      '#5733FF',
-      '#33FFA8',
-      '#FFA833',
-      '#A833FF',
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
+    setMustSpin(false);
   };
 
   const filteredUniversities = universities.filter(
     university => university.location === selectedCity
   );
 
-  const data = filteredUniversities.map((university, index) => ({
-    option: index.toString(),
-    style: { backgroundColor: generateRandomColor(), textColor: 'black' },
-    name: university.universityName,
-  }));
   const getUniversityWebsite = () => {
     if (winner) {
       const winningUniversity = universities.find(
@@ -108,14 +90,27 @@ export const Roulette = () => {
   };
 
   const handleSpinClick = () => {
-    if (!mustSpin && data.length > 0) {
-      const newPrizeNumber = Math.floor(Math.random() * data.length);
+    if (!mustSpin && filteredUniversities.length > 0) {
+      const newPrizeNumber = Math.floor(Math.random() * 30 + 10);
       setPrizeNumber(newPrizeNumber);
       setMustSpin(true);
-      console.log(prizeNumber);
     }
   };
-  console.log(data);
+
+  const generatePrizes = (universities, repeatCount) => {
+    let repeatedPrizes = [];
+    while (repeatedPrizes.length < 40) {
+      repeatedPrizes = [
+        ...repeatedPrizes,
+        ...universities.map((university, index) => ({ ...university, index })),
+      ];
+    }
+    return repeatedPrizes.slice(0, 40).map((university, index) => ({
+      image: university.img,
+      index: university.index, // Додано індекс об'єкта університету як приз
+    }));
+  };
+
   return (
     <RouletteContainer>
       <Container>
@@ -125,7 +120,9 @@ export const Roulette = () => {
         <RouletteDesc>
           {selectedCity && ` Обране місто: ${selectedCity}`}
         </RouletteDesc>
-        <RouletteList style={{ position: 'relative' }}>
+        <RouletteList
+          style={{ position: 'relative', maxWidth: '600px', margin: '0 auto' }}
+        >
           <MDBDropdown>
             <MDBDropdownToggle className="btn btn-primary dropdown-toggle">
               Виберіть місто
@@ -147,18 +144,18 @@ export const Roulette = () => {
               {loading ? (
                 <Loader />
               ) : (
-                <RouletteSpinerContainer>
-                  <WheelItem
-                    mustStartSpinning={mustSpin}
-                    prizeNumber={prizeNumber}
-                    data={data}
-                    onStopSpinning={handleStopSpinning}
-                  />
-                </RouletteSpinerContainer>
+                <RoulettePro
+                  prizes={generatePrizes(filteredUniversities)}
+                  prizeIndex={prizeNumber}
+                  start={mustSpin}
+                  onPrizeDefined={handleStopSpinning}
+                  spinningTime={10}
+                  options={{ withoutAnimation: true }}
+                />
               )}
               <MDBBtn
                 onClick={handleSpinClick}
-                disabled={loading}
+                disabled={loading || mustSpin}
                 className="me-1"
                 color="success"
               >

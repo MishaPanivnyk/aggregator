@@ -16,9 +16,23 @@ export const RouletteContainer = styled.section`
   justify-content: center;
   align-items: center;
   background: black;
+  .roulette-pro-regular-prize-item-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #383f48;
+    background-color: #2e3640;
+    background: radial-gradient(farthest-corner, #ffffff 0, #ffffff 100%);
+    object-fit: cover;
+  }
+  .roulette-pro-regular-prize-item-image {
+    object-position: center;
+  }
   .dropdown {
     @media only screen and (min-width: 768px) {
-      position: absolute;
+      /* position: absolute; */
       top: 0;
       left: -235px;
     }
@@ -40,10 +54,10 @@ export const RouletteContainer = styled.section`
 `;
 
 export const RouletteSpinerContainer = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
@@ -52,7 +66,6 @@ export const RouletteSpinerContainer = styled.div`
 export const RouletteTitlte = styled.h1`
   color: #d9d9d9;
   text-align: center;
-
   font-family: 'Josefin Sans';
   font-size: 22px;
   font-style: normal;
@@ -87,12 +100,12 @@ export const RouletteDesc = styled.p`
   }
 `;
 export const RouletteList = styled.div`
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   @media only screen and (min-width: 768px) {
-    flex-direction: initial;
+    /* flex-direction: initial;
     gap: 50px;
-    justify-content: flex-start;
+    justify-content: flex-start; */
   }
   @media only screen and (min-width: 1024px) {
   }
