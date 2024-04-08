@@ -111,7 +111,6 @@ export const Universities = () => {
 
     setCurrentPage(1);
   };
-
   const addToComparison = async universityId => {
     try {
       await axios.post(
@@ -125,13 +124,22 @@ export const Universities = () => {
           },
         }
       );
-      toast.success('Успішно добавлено в порівняння!');
+      toast.success('Успішно додано в порівняння!');
     } catch (error) {
-      if (error.response.status === 409) {
-        toast.error('Досягнута максимальна кількість університетів!');
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error('Авторизуйтесь!');
+        } else if (error.response.status === 400) {
+          toast.error('Досягнута максимальна кількість для порівняння');
+        } else if (error.response.status === 409) {
+          toast.error('Цей університет вже додано в порівняння!');
+        } else {
+          console.error('Error adding university to comparison:', error);
+          toast.error('Щось пішло не так. Спробуйте ще раз пізніше.');
+        }
       } else {
-        console.error('Error removing university from comparison:', error);
-        toast.error('Авторизуйтесь!');
+        console.error('Error adding university to comparison:', error);
+        toast.error('Щось пішло не так. Спробуйте ще раз пізніше.');
       }
     }
   };
