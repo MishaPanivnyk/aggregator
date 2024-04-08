@@ -14,6 +14,7 @@ import University from 'pages/University/University';
 import Reviews from 'pages/Reviews/Reviews';
 import Comparison from 'pages/Comparison/Comparison';
 import Leaders from 'pages/Leaders/Leaders';
+import ResetPassword from 'pages/ResetPassword/ResetPassword';
 
 export const App = () => {
   return (
@@ -32,6 +33,7 @@ export const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/reset-password/*" element={<ResetPassword />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </SharedLayout>
