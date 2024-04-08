@@ -78,7 +78,7 @@ const Comparison = () => {
     <ComparisonContainer>
       <ComparisonTitle>Порівняння університетів</ComparisonTitle>
       <Grid container justifyContent="center">
-        <Grid item xs={11}>
+        <Grid item xs={12}>
           {loading ? (
             <Loader />
           ) : comparedUniversities.length === 0 ? (
