@@ -6,11 +6,11 @@ export const Link = styled(NavLink)`
     border-radius: 50%;
     position: absolute;
     background: #00d254;
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     color: #fff;
     font-family: 'Poppins';
-    font-size: 15px;
+    font-size: 12px;
 
     font-style: normal;
     font-weight: 900;
