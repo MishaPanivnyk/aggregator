@@ -16,6 +16,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 export const ModalAuth = ({ isOpen, onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
@@ -54,15 +56,13 @@ export const ModalAuth = ({ isOpen, onClose }) => {
           formData
         );
         localStorage.setItem('token', response.data.token);
-        toast.success('Ви успішно увійшли!');
         console.log('Logged in successfully:', response.data);
-      } else {
+      } else if (!isForgotPassword) {
         const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/api/register/`,
           formData
         );
         localStorage.setItem('token', response.data.token);
-        toast.success('Ви успішно зареєстровані!');
         console.log('Registered successfully:', response.data.token);
       }
       setIsClosing(true);
@@ -72,6 +72,22 @@ export const ModalAuth = ({ isOpen, onClose }) => {
       } else {
         toast.error('Помилка реєстрації!');
       }
+    }
+
+    if (isForgotPassword) {
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/api/forgot-password/`,
+          formData
+        );
+        toast.success(
+          'Повідомлення про відновлення пароля відправлено на вашу електронну пошту!'
+        );
+        console.log('Password reset email sent successfully:', response.data);
+      } catch (error) {
+        toast.error('Помилка відновлення пароля!');
+      }
+      setIsClosing(true);
     }
   };
 
@@ -122,31 +138,125 @@ export const ModalAuth = ({ isOpen, onClose }) => {
         </CloseButton>
         <ModalTitle>{isLogin ? 'Login to UMatch' : 'Join UMatch'}</ModalTitle>
         <form onSubmit={handleSubmit}>
-          {isLogin ? (
+          {!isForgotPassword && (
             <>
-              <ModalLabel>Username:</ModalLabel>
-              <ModalInput
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                autoComplete="username"
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-              />
+              {isLogin ? (
+                <>
+                  <ModalLabel>Username:</ModalLabel>
+                  <ModalInput
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    autoComplete="username"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                  />
+                </>
+              ) : (
+                <>
+                  <ModalLabel>Username:</ModalLabel>
+                  <ModalInput
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    autoComplete="username"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                  />
+                  <ModalLabel>Email:</ModalLabel>
+                  <ModalInput
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
+                  />
+                </>
+              )}
+              <ModalLabel>Password:</ModalLabel>
+              <div style={{ position: 'relative' }}>
+                <ModalInput
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                />
+                {showPassword ? (
+                  <FiEyeOff
+                    onClick={toggleShowPassword}
+                    style={{
+                      position: 'absolute',
+                      right: '20px',
+                      top: '30px',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      fontSize: '20px',
+                    }}
+                  />
+                ) : (
+                  <FiEye
+                    onClick={toggleShowPassword}
+                    style={{
+                      position: 'absolute',
+                      right: '20px',
+                      top: '30px',
+                      transform: 'translateY(-50%)',
+                      cursor: 'pointer',
+                      fontSize: '20px',
+                    }}
+                  />
+                )}
+              </div>
+              {!isLogin && (
+                <>
+                  <ModalLabel>Confirm Password:</ModalLabel>
+                  <div style={{ position: 'relative' }}>
+                    <ModalInput
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      onFocus={handleInputFocus}
+                      onBlur={handleInputBlur}
+                    />
+                    {showConfirmPassword ? (
+                      <FiEyeOff
+                        onClick={toggleShowConfirmPassword}
+                        style={{
+                          position: 'absolute',
+                          right: '20px',
+                          top: '30px',
+                          transform: 'translateY(-50%)',
+                          cursor: 'pointer',
+                          fontSize: '20px',
+                        }}
+                      />
+                    ) : (
+                      <FiEye
+                        onClick={toggleShowConfirmPassword}
+                        style={{
+                          position: 'absolute',
+                          right: '20px',
+                          top: '30px',
+                          transform: 'translateY(-50%)',
+                          cursor: 'pointer',
+                          fontSize: '20px',
+                        }}
+                      />
+                    )}
+                  </div>
+                </>
+              )}
             </>
-          ) : (
+          )}
+          {isForgotPassword && (
             <>
-              <ModalLabel>Username:</ModalLabel>
-              <ModalInput
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                autoComplete="username"
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-              />
               <ModalLabel>Email:</ModalLabel>
               <ModalInput
                 type="email"
@@ -159,92 +269,21 @@ export const ModalAuth = ({ isOpen, onClose }) => {
               />
             </>
           )}
-          <ModalLabel>Password:</ModalLabel>
-          <div style={{ position: 'relative' }}>
-            <ModalInput
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-            />
-            {showPassword ? (
-              <FiEyeOff
-                onClick={toggleShowPassword}
-                style={{
-                  position: 'absolute',
-                  right: '20px',
-                  top: '30px',
-                  transform: 'translateY(-50%)',
-                  cursor: 'pointer',
-                  fontSize: '20px',
-                }}
-              />
-            ) : (
-              <FiEye
-                onClick={toggleShowPassword}
-                style={{
-                  position: 'absolute',
-                  right: '20px',
-                  top: '30px',
-                  transform: 'translateY(-50%)',
-                  cursor: 'pointer',
-                  fontSize: '20px',
-                }}
-              />
-            )}
-          </div>
-          {!isLogin && (
-            <>
-              <ModalLabel>Confirm Password:</ModalLabel>
-              <div style={{ position: 'relative' }}>
-                <ModalInput
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  onFocus={handleInputFocus}
-                  onBlur={handleInputBlur}
-                />
-                {showConfirmPassword ? (
-                  <FiEyeOff
-                    onClick={toggleShowConfirmPassword}
-                    style={{
-                      position: 'absolute',
-                      right: '20px',
-                      top: '30px',
-                      transform: 'translateY(-50%)',
-                      cursor: 'pointer',
-                      fontSize: '20px',
-                    }}
-                  />
-                ) : (
-                  <FiEye
-                    onClick={toggleShowConfirmPassword}
-                    style={{
-                      position: 'absolute',
-                      right: '20px',
-                      top: '30px',
-                      transform: 'translateY(-50%)',
-                      cursor: 'pointer',
-                      fontSize: '20px',
-                    }}
-                  />
-                )}
-              </div>
-            </>
-          )}
-
-          <ModalBtn type="submit">{isLogin ? 'Login' : 'Sign Up'}</ModalBtn>
+          <ModalBtn type="submit">
+            {isLogin ? 'Login' : isForgotPassword ? 'Submit' : 'Sign Up'}
+          </ModalBtn>
         </form>
+
         <ModalDesc>
           {isLogin ? (
             <>
               Don't have an account?{' '}
               <button
                 type="button"
-                onClick={() => setIsLogin(false)}
+                onClick={() => {
+                  setIsLogin(false);
+                  setIsForgotPassword(false);
+                }}
                 disabled={isInputFocused}
               >
                 Sign Up
@@ -255,13 +294,27 @@ export const ModalAuth = ({ isOpen, onClose }) => {
               Already have an account?{' '}
               <button
                 type="button"
-                onClick={() => setIsLogin(true)}
+                onClick={() => {
+                  setIsLogin(true);
+                  setIsForgotPassword(false);
+                }}
                 disabled={isInputFocused}
               >
                 Login
               </button>
             </>
           )}
+        </ModalDesc>
+        <ModalDesc>
+          <button
+            type="button"
+            onClick={() => {
+              setIsLogin(false);
+              setIsForgotPassword(true);
+            }}
+          >
+            Forgot password?
+          </button>
         </ModalDesc>
       </ModalContainer>
     </>
