@@ -41,7 +41,7 @@ export const LeaderImg = styled.img`
   object-fit: cover;
   filter: brightness(0.5);
   @media only screen and (min-width: 768px) {
-    height: 900px;
+    height: 700px;
   }
   @media only screen and (min-width: 1024px) {
   }
