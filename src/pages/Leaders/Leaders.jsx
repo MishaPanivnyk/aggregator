@@ -19,7 +19,9 @@ const Leaders = () => {
         const response = await axios.get(
           'https://aggregator-django.onrender.com/top-universities/'
         );
-        setLeaders(response.data);
+
+        const sortedLeaders = response.data.sort((a, b) => a.place - b.place);
+        setLeaders(sortedLeaders);
       } catch (error) {
         console.error('Error fetching leaders:', error);
       }
