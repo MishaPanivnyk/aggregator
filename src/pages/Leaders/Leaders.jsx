@@ -50,9 +50,6 @@ const Leaders = () => {
                 Середній конкурсний бал:
                 <span> {leader.averageCompetitveScore}</span>
               </LeaderItemDesc>
-              <LeaderItemDesc>
-                Рік: <span>{leader.year}</span>
-              </LeaderItemDesc>
             </LeaderTextContainer>
           </LeaderItem>
         ))}
