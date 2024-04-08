@@ -50,7 +50,7 @@ const ResetPassword = () => {
       setError('');
 
       // Перенаправлення на головну сторінку після успішного скидання паролю
-      window.location.href = '/';
+      window.location.href = '/aggregator/';
     } catch (error) {
       setError('Щось пішло не так. Будь ласка, спробуйте ще раз.');
     }
