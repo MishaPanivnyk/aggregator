@@ -25,7 +25,7 @@ const FormWrapper = styled.div`
 const ResetPassword = () => {
   const { uidb64, token } = useParams();
 
-  const [password, setPassword] = useState('');
+  const [new_password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -33,7 +33,7 @@ const ResetPassword = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (new_password !== confirmPassword) {
       setError('Паролі не співпадають');
       return;
     }
@@ -42,7 +42,7 @@ const ResetPassword = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/api/reset-password/${uidb64}/${token}/`,
         {
-          password,
+          new_password,
         }
       );
       setSuccess(true);
@@ -79,7 +79,7 @@ const ResetPassword = () => {
                 type="password"
                 label="Новий пароль"
                 style={{ marginBottom: '8px' }}
-                value={password}
+                value={new_password}
                 onChange={e => setPassword(e.target.value)}
                 required
               />
