@@ -1,4 +1,3 @@
-// Comparison.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from './Comparison.styled';
@@ -27,6 +26,7 @@ export const Comparison = ({ onClick }) => {
     };
 
     fetchComparisonCount();
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -45,6 +45,7 @@ const Comparison = () => {
     };
 
     fetchComparedUniversities();
+    // eslint-disable-next-line
   }, []);
 
   const removeFromComparison = async id => {
