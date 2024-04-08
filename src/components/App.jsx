@@ -33,7 +33,10 @@ export const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/comparison" element={<Comparison />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/reset-password/*" element={<ResetPassword />} />
+          <Route
+            path="/reset-password/:uidb64/:token"
+            element={<ResetPassword />}
+          />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </SharedLayout>
