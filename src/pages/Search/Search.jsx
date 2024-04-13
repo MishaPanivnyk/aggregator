@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
 import { useLocation } from 'react-router-dom';
+import { MdCompareArrows } from 'react-icons/md';
 import { Container } from 'components/Container/Container';
 import {
   SearchContainer,
@@ -153,9 +154,13 @@ const Search = () => {
                       Детальніше
                     </UniversitiesItemBtnLinkId>
                     <UniversitiesItemaAddCompare>
-                      <svg width="12px" height="12px">
-                        <use href={sprite + '#icon-compare'} />
-                      </svg>
+                    <MdCompareArrows
+                        style={{
+                          marginRight: '5px',
+                          cursor: 'pointer',
+                          fontSize: '17px',
+                        }}
+                      />
                       Добавити в порівняння
                     </UniversitiesItemaAddCompare>
                   </UniversitiesItemBtnContainer>
