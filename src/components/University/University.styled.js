@@ -92,7 +92,7 @@ export const UniversityImg = styled.img`
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   margin-bottom: 50px;
   @media only screen and (min-width: 768px) {
     margin-bottom: 37px;
