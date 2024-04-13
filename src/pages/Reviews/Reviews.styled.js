@@ -5,7 +5,22 @@ export const ReviewsContainer = styled.section`
   background-color: #eee;
   padding-top: 60px;
   padding-bottom: 35px;
-
+  .mb-0 {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  .page-link {
+    color: #2b2b2b;
+  }
+  .page-link.active,
+  .active > .page-link {
+    color: #fff;
+    background-color: #01e45c;
+  }
+  .page-link:hover{
+    background-color: #97c1a8 !important;
+  }
   @media only screen and (min-width: 768px) {
     padding-left: 50px;
     padding-right: 50px;
