@@ -154,7 +154,7 @@ export const BlogItemDate = styled.p`
 export const BlogItemBtn = styled(NavLink)`
   color: #b5b5b5;
   text-align: center;
-  font-family: 'Open Sans';
+  /* font-family: 'Open Sans'; */
   font-size: 10px;
   font-style: normal;
   font-weight: 700;

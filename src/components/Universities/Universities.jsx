@@ -246,7 +246,7 @@ export const Universities = () => {
         {!isUniversitiesPage && (
           <UniversitiesTitle>Популярні напрями</UniversitiesTitle>
         )}
-        {isMobile && (
+        {isMobile && isUniversitiesPage && (
           <UniversitiesFilterBtn onClick={toggleFilter}>
             Фільтри
             <svg width="20px" height="20px">
