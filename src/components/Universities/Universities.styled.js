@@ -420,11 +420,10 @@ export const UniversitiesCategoryContainer = styled.div`
   }
 `;
 export const UniversitiesCategoryItemContainer = styled.div`
-  display: flex;
-
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
+    display: flex;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-right: 90px;
