@@ -112,7 +112,7 @@ export const BlogItemDesc = styled.p`
   background: #2b2b2b;
   color: #fff;
   text-align: center;
-  font-family: 'Open Sans';
+  /* font-family: 'Open Sans'; */
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
