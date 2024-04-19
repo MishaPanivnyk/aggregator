@@ -406,3 +406,71 @@ export const UniversitiesItemFeatures = styled.p`
   @media only screen and (min-width: 1024px) {
   }
 `;
+export const UniversitiesCategoryContainer = styled.div`
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 5px;
+  border: 3px solid #f0f0f0;
+  background: #fff;
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+  }
+`;
+export const UniversitiesCategoryItemContainer = styled.div`
+  display: flex;
+
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 90px;
+    padding-left: 90px;
+  }
+`;
+export const UniversitiesFilterBtn = styled.button`
+  color: #2b2b2b;
+  font-family: 'Open Sans';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 15px;
+  background: transparent;
+  border-radius: 100px;
+  border: 1px solid #d7d7d7;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  align-items: center;
+
+  & svg {
+    margin-left: 5px;
+  }
+  @media only screen and (min-width: 768px) {
+  }
+  @media only screen and (min-width: 1024px) {
+  }
+`;
+export const FilterContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  height: 100%;
+  background-color: white;
+  z-index: 1000;
+  overflow-y: auto;
+`;
+export const FilterButtonClose = styled.button`
+  background: inherit;
+  border: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+`;
