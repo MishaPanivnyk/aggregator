@@ -20,6 +20,8 @@ export const ModalContent = styled.div`
   position: relative;
   border-radius: 5px;
   max-width: 400px;
+  max-height: 460px;
+  overflow-y: auto;
 `;
 
 export const CloseButton = styled.a`
