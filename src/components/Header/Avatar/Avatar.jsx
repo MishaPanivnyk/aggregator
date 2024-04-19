@@ -18,7 +18,6 @@ export const Avatar = ({ isClickable, onClick, width, height }) => {
     const fetchProfileData = async () => {
       if (token) {
         try {
-          console.log('Token being sent:', token);
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_URL}/api/profile/`,
             {

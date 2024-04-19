@@ -56,14 +56,13 @@ export const ModalAuth = ({ isOpen, onClose }) => {
           formData
         );
         localStorage.setItem('token', response.data.token);
-        console.log('Logged in successfully:', response.data);
+        window.location.reload();
       } else if (!isForgotPassword) {
         const response = await axios.post(
           `${process.env.REACT_APP_BACKEND_URL}/api/register/`,
           formData
         );
         localStorage.setItem('token', response.data.token);
-        console.log('Registered successfully:', response.data.token);
       }
       setIsClosing(true);
     } catch (error) {

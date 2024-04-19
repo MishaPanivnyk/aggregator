@@ -36,6 +36,7 @@ export const LogoutDropdown = ({ onLogout }) => {
       console.log('Logout successful:', response.data);
       localStorage.removeItem('token');
       onLogout();
+      window.location.reload();
     } catch (error) {
       if (error.response && error.response.status === 401) {
         toast.error('Невірний токен або авторизація!');
@@ -86,7 +87,7 @@ export const LogoutDropdown = ({ onLogout }) => {
       <EditProfileContainer>
         <EditProfile>Edit profile</EditProfile>
         <ButtonEdit to="/profile">
-          <FiEdit2 color='black'/>
+          <FiEdit2 color="black" />
         </ButtonEdit>
       </EditProfileContainer>
       <ModalBtnLogaut onClick={toggleConfirm}>Logout</ModalBtnLogaut>
