@@ -3,13 +3,9 @@ import axios from 'axios';
 import { Loader } from 'components/Loader/Loader';
 import sprite from 'img/sprite.svg';
 import { useLocation } from 'react-router-dom';
+import { Pagination } from '@mui/material';
 import { MdCompareArrows } from 'react-icons/md';
 import { Container } from 'components/Container/Container';
-import {
-  MDBPagination,
-  MDBPaginationItem,
-  MDBPaginationLink,
-} from 'mdb-react-ui-kit';
 import { useMediaQuery } from 'react-responsive';
 import {
   UniversitiesContainer,
@@ -57,6 +53,9 @@ export const Universities = () => {
   });
   const isMobile = useMediaQuery({
     query: '(max-width: 1023px) ',
+  });
+  const isMobilePagination = useMediaQuery({
+    query: '(max-width: 767px) ',
   });
   const isPc = useMediaQuery({
     query: '(min-width: 1024px) ',
@@ -192,6 +191,12 @@ export const Universities = () => {
       setSelectedType(type);
     }
     setCurrentPage(1);
+  };
+
+  const totalPages = Math.ceil(universities.length / universitiesPerPage);
+
+  const handleChange = (event, newPage) => {
+    paginate(newPage);
   };
 
   const handleDistanceLearningChange = event => {
@@ -502,24 +507,19 @@ export const Universities = () => {
         </UniversitiesCategoryItemContainer>
         {isUniversitiesPage
           ? universities.length > universitiesPerPage && (
-              <MDBPagination size={isTablet ? 'lg' : 'sm'} className="mb-0">
-                {Array.from(
-                  {
-                    length: Math.ceil(
-                      universities.length / universitiesPerPage
-                    ),
-                  },
-                  (_, i) => (
-                    <MDBPaginationItem
-                      key={i}
-                      active={i + 1 === currentPage}
-                      onClick={() => paginate(i + 1)}
-                    >
-                      <MDBPaginationLink href="#">{i + 1}</MDBPaginationLink>
-                    </MDBPaginationItem>
-                  )
-                )}
-              </MDBPagination>
+              <Pagination
+                className="mb-0"
+                count={totalPages}
+                page={currentPage}
+                onChange={handleChange}
+                color="primary"
+                showFirstButton={currentPage > 1}
+                showLastButton={currentPage < totalPages}
+                size={
+                  isMobilePagination ? 'small' : isTablet ? 'large' : 'large'
+                }
+                shape="rounded"
+              />
             )
           : universities.length > visibleUniversities.length && (
               <ButtonContainer>
