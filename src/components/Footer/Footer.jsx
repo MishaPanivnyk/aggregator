@@ -107,11 +107,19 @@ export const Footer = ({ onClick }) => {
                 </CategoryItemTitle>
                 {isOpen[0] && (
                   <CategoryBoxItemLink>
-                    <CategoryItemLink>IT</CategoryItemLink>
-                    <CategoryItemLink>Економіка</CategoryItemLink>
-                    <CategoryItemLink>Право</CategoryItemLink>
-                    <CategoryItemLink>Мистецтво</CategoryItemLink>
-                    <CategoryItemLink>Сфера обслуговування</CategoryItemLink>
+                    <CategoryItemLink to={'/universities'}>IT</CategoryItemLink>
+                    <CategoryItemLink to={'/universities'}>
+                      Економіка
+                    </CategoryItemLink>
+                    <CategoryItemLink to={'/universities'}>
+                      Право
+                    </CategoryItemLink>
+                    <CategoryItemLink to={'/universities'}>
+                      Мистецтво
+                    </CategoryItemLink>
+                    <CategoryItemLink to={'/universities'}>
+                      Сфера обслуговування
+                    </CategoryItemLink>
                   </CategoryBoxItemLink>
                 )}
               </CategoryItem>
