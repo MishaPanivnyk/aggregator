@@ -77,17 +77,13 @@ export const Universities = () => {
     'Фізика',
     'Архітектура та будівництво',
     'Міжнародне право',
-    // 'Управління та адміністрування',
-    // 'Математика та статистика',
-    // 'Хімія',
-    // 'Адміністрування',
   ]);
   const [selectedDirection, setSelectedDirection] = useState('IT');
   const [universities, setUniversities] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [visibleUniversities, setVisibleUniversities] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [uniqueDirections, setUniqueDirections] = useState([]);
+
   const [selectedCities, setSelectedCities] = useState([]);
   const universitiesPerPage = 5;
 
@@ -99,11 +95,6 @@ export const Universities = () => {
           `${process.env.REACT_APP_BACKEND_URL}/universities`
         );
         const data = response.data;
-        // Збір унікальних напрямів
-        // const allDirections = data.flatMap(university =>
-        //   university.specialties.map(specialty => specialty.direction)
-        // );
-        // const uniqueDirections = [...new Set(allDirections)];
 
         let filteredUniversities = data;
 
@@ -140,15 +131,13 @@ export const Universities = () => {
           ...new Set(data.map(university => university.location)),
         ];
         setCities(uniqueCities);
-        // setUniqueDirections(uniqueDirections);
-        setUniversities(filteredUniversities);
       } catch (error) {
         console.error('Error fetching all universities:', error);
       } finally {
         setLoading(false);
       }
     };
-
+    window.scrollTo(0, 0);
     fetchAllUniversities();
   }, [selectedDirection, selectedType, selectedCities, isDistanceLearning]);
 
@@ -176,7 +165,7 @@ export const Universities = () => {
 
   const handleDirectionClick = direction => {
     if (selectedDirection === direction) {
-      setSelectedDirection(null); // Знімаємо виділення, якщо напрям вже обраний
+      setSelectedDirection(null);
     } else {
       setSelectedDirection(direction);
     }
@@ -211,6 +200,7 @@ export const Universities = () => {
     } else {
       setSelectedCities([...selectedCities, city]);
     }
+    setCurrentPage(1);
   };
   const addToComparison = async universityId => {
     try {

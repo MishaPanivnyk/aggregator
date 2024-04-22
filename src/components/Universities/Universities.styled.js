@@ -57,7 +57,9 @@ export const UniversitiesContainer = styled.section`
   }
   .css-1pi9rcw-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected,
   .css-1mb5p0g-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected,
-  .css-s1jfdj-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  .css-s1jfdj-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected,
+  .Mui-selected,
+  .css-1bfr02t.Mui-selected {
     background-color: #01e45c !important;
   }
   padding-top: 50px;
