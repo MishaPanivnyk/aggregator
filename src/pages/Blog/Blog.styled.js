@@ -21,6 +21,9 @@ export const BlogTitle = styled.h1`
   @media only screen and (min-width: 768px) {
   }
   @media only screen and (min-width: 1024px) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
   }
 `;
 export const BlogContentContainer = styled.div`
@@ -51,7 +54,7 @@ export const BlogImg = styled.img`
     margin-left: auto;
   }
   @media only screen and (min-width: 1024px) {
-    width: 500px;
+    width: 700px;
     margin-right: auto;
     margin-left: auto;
   }
