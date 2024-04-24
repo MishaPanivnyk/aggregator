@@ -44,6 +44,7 @@ import {
   FormGroup,
   FormLabel,
 } from '@mui/material';
+import { useComparison } from '../Header/Comparison/ComparisonContext';
 
 export const Universities = () => {
   const location = useLocation();
@@ -86,6 +87,7 @@ export const Universities = () => {
 
   const [selectedCities, setSelectedCities] = useState([]);
   const universitiesPerPage = 5;
+  const { addToComparisonContext } = useComparison();
 
   useEffect(() => {
     const fetchAllUniversities = async () => {
@@ -137,7 +139,6 @@ export const Universities = () => {
         setLoading(false);
       }
     };
-    window.scrollTo(0, 0);
     fetchAllUniversities();
   }, [selectedDirection, selectedType, selectedCities, isDistanceLearning]);
 
@@ -215,6 +216,7 @@ export const Universities = () => {
           },
         }
       );
+      addToComparisonContext(universityId);
       toast.success('Успішно додано в порівняння!');
     } catch (error) {
       if (error.response) {

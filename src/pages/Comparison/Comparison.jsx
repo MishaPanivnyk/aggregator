@@ -20,10 +20,12 @@ import {
   ErrorMessage,
 } from './Comparison.styled';
 import { ErrorIcon } from 'components/Error/Error.styled';
+import { useComparison } from '../../components/Header/Comparison/ComparisonContext';
 
 const Comparison = () => {
   const [comparedUniversities, setComparedUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { removeFromComparisonContext } = useComparison();
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -37,6 +39,7 @@ const Comparison = () => {
             },
           }
         );
+
         setComparedUniversities(response.data);
         setLoading(false);
       } catch (error) {
@@ -67,6 +70,7 @@ const Comparison = () => {
       );
 
       setComparedUniversities(updatedUniversities);
+      removeFromComparisonContext(id);
       toast.success('Успішно видалено з порівняння!');
     } catch (error) {
       console.error('Error removing university from comparison:', error);

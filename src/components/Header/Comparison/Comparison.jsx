@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Link } from './Comparison.styled';
 import sprite from 'img/sprite.svg';
+import { useComparison } from './ComparisonContext';
 
 export const Comparison = ({ onClick }) => {
-  const [comparisonCount, setComparisonCount] = useState(0);
+  const { comparisonCount, setComparisonCount } = useComparison();
   const token = localStorage.getItem('token');
   useEffect(() => {
     const fetchComparisonCount = async () => {
@@ -18,7 +19,6 @@ export const Comparison = ({ onClick }) => {
           }
         );
         const count = response.data.length;
-        console.log(count);
         setComparisonCount(count);
       } catch (error) {
         console.error('Error fetching comparison count:', error);
@@ -26,8 +26,7 @@ export const Comparison = ({ onClick }) => {
     };
 
     fetchComparisonCount();
-    // eslint-disable-next-line
-  }, []);
+  }, [setComparisonCount, token]);
 
   return (
     <div>
