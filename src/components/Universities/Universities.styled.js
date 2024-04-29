@@ -92,7 +92,7 @@ export const UniversitiesTitle = styled.h2`
 export const DirectionList = styled.ul`
   width: 100%;
   display: flex;
-  gap: 40px;
+  gap: 20px;
 
   align-items: center;
   @media only screen and (min-width: 768px) {
