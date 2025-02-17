@@ -1,0 +1,380 @@
+/*
+          object-assign
+          (c) Sindre Sorhus
+          @license MIT
+          */
+
+/*!
+ * Quill Editor v1.3.7
+ * https://quilljs.com/
+ * Copyright (c) 2014, Jason Chen
+ * Copyright (c) 2013, salesforce.com
+ */
+
+/*!
+ * perfect-scrollbar v1.5.3
+ * Copyright 2021 Hyunje Jun, MDBootstrap and Contributors
+ * Licensed under MIT
+ */
+
+/*! ../../context/RouletteContext */
+
+/*! ../../designs/Regular */
+
+/*! ../../hooks */
+
+/*! ../../utills */
+
+/*! ../PrizesWrapper */
+
+/*! ../Wrapper */
+
+/*! ../getRandomIntInRange */
+
+/*! ./Component */
+
+/*! ./Context */
+
+/*! ./PrizesWrapper */
+
+/*! ./PrizesWrapper.css */
+
+/*! ./Regular */
+
+/*! ./Regular.css */
+
+/*! ./Roulette */
+
+/*! ./Wrapper */
+
+/*! ./Wrapper.css */
+
+/*! ./checkPropTypes */
+
+/*! ./cjs/react-is.development.js */
+
+/*! ./classNames */
+
+/*! ./components/Roulette */
+
+/*! ./factoryWithTypeCheckers */
+
+/*! ./getPrizeAdditionalOffset */
+
+/*! ./getPrizeOffset */
+
+/*! ./getRandomIntInRange */
+
+/*! ./lib/ReactPropTypesSecret */
+
+/*! ./lib/has */
+
+/*! ./mediaQuery */
+
+/*! ./toQuery */
+
+/*! ./useAudio */
+
+/*! ./useMediaQuery */
+
+/*! css-mediaquery */
+
+/*! hyphenate-style-name */
+
+/*! matchmediaquery */
+
+/*! object-assign */
+
+/*! prop-types */
+
+/*! react */
+
+/*! react-is */
+
+/*! shallow-equal */
+
+/*!**********************!*\
+          !*** ./src/index.ts ***!
+          \**********************/
+
+/*!************************!*\
+          !*** ./src/Context.ts ***!
+          \************************/
+
+/*!************************!*\
+          !*** ./src/toQuery.ts ***!
+          \************************/
+
+/*!**************************!*\
+          !*** ./src/Component.ts ***!
+          \**************************/
+
+/*!***************************!*\
+          !*** ./src/mediaQuery.ts ***!
+          \***************************/
+
+/*!****************************!*\
+          !*** ./src/hooks/index.ts ***!
+          \****************************/
+
+/*!*****************************!*\
+          !*** ./src/utills/index.ts ***!
+          \*****************************/
+
+/*!******************************!*\
+          !*** ./src/useMediaQuery.ts ***!
+          \******************************/
+
+/*!*************************************!*\
+          !*** ./src/hooks/useAudio/index.ts ***!
+          \*************************************/
+
+/*!**************************************!*\
+          !*** ./src/designs/Regular/index.ts ***!
+          \**************************************/
+
+/*!****************************************!*\
+          !*** ./node_modules/react-is/index.js ***!
+          \****************************************/
+
+/*!****************************************!*\
+          !*** ./src/hooks/useAudio/useAudio.ts ***!
+          \****************************************/
+
+/*!****************************************!*\
+          !*** ./src/utills/classNames/index.ts ***!
+          \****************************************/
+
+/*!*****************************************!*\
+          !*** ./src/components/Wrapper/index.ts ***!
+          \*****************************************/
+
+/*!*****************************************!*\
+          !*** ./src/context/RouletteContext.tsx ***!
+          \*****************************************/
+
+/*!*****************************************!*\
+          !*** ./src/designs/Regular/Regular.css ***!
+          \*****************************************/
+
+/*!*****************************************!*\
+          !*** ./src/designs/Regular/Regular.tsx ***!
+          \*****************************************/
+
+/*!******************************************!*\
+          !*** ./node_modules/prop-types/index.js ***!
+          \******************************************/
+
+/*!******************************************!*\
+          !*** ./src/components/Roulette/index.ts ***!
+          \******************************************/
+
+/*!********************************************!*\
+          !*** ./node_modules/prop-types/lib/has.js ***!
+          \********************************************/
+
+/*!********************************************!*\
+          !*** ./src/components/Wrapper/Wrapper.css ***!
+          \********************************************/
+
+/*!********************************************!*\
+          !*** ./src/components/Wrapper/Wrapper.tsx ***!
+          \********************************************/
+
+/*!********************************************!*\
+          !*** ./src/utills/getPrizeOffset/index.ts ***!
+          \********************************************/
+
+/*!*********************************************!*\
+          !*** ./node_modules/object-assign/index.js ***!
+          \*********************************************/
+
+/*!*********************************************!*\
+          !*** ./src/utills/classNames/classNames.ts ***!
+          \*********************************************/
+
+/*!**********************************************!*\
+          !*** ./node_modules/css-mediaquery/index.js ***!
+          \**********************************************/
+
+/*!**********************************************!*\
+          !*** ./src/components/Roulette/Roulette.tsx ***!
+          \**********************************************/
+
+/*!***********************************************!*\
+          !*** ./node_modules/matchmediaquery/index.js ***!
+          \***********************************************/
+
+/*!***********************************************!*\
+          !*** ./src/components/PrizesWrapper/index.ts ***!
+          \***********************************************/
+
+/*!*************************************************!*\
+          !*** ./src/utills/getRandomIntInRange/index.ts ***!
+          \*************************************************/
+
+/*!***************************************************!*\
+          !*** ./node_modules/prop-types/checkPropTypes.js ***!
+          \***************************************************/
+
+/*!****************************************************!*\
+          !*** ./node_modules/hyphenate-style-name/index.js ***!
+          \****************************************************/
+
+/*!*****************************************************!*\
+          !*** ./src/utills/getPrizeOffset/getPrizeOffset.ts ***!
+          \*****************************************************/
+
+/*!******************************************************!*\
+          !*** ./node_modules/shallow-equal/dist/index.esm.js ***!
+          \******************************************************/
+
+/*!******************************************************!*\
+          !*** ./src/utills/getPrizeAdditionalOffset/index.ts ***!
+          \******************************************************/
+
+/*!********************************************************!*\
+          !*** ./src/components/PrizesWrapper/PrizesWrapper.css ***!
+          \********************************************************/
+
+/*!********************************************************!*\
+          !*** ./src/components/PrizesWrapper/PrizesWrapper.tsx ***!
+          \********************************************************/
+
+/*!***********************************************************!*\
+          !*** ./node_modules/react-is/cjs/react-is.development.js ***!
+          \***********************************************************/
+
+/*!************************************************************!*\
+          !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
+          \************************************************************/
+
+/*!*************************************************************!*\
+          !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
+          \*************************************************************/
+
+/*!***************************************************************!*\
+          !*** ./src/utills/getRandomIntInRange/getRandomIntInRange.ts ***!
+          \***************************************************************/
+
+/*!*************************************************************************!*\
+          !*** ./src/utills/getPrizeAdditionalOffset/getPrizeAdditionalOffset.ts ***!
+          \*************************************************************************/
+
+/*!**************************************************************************************!*\
+          !*** external {"commonjs":"react","commonjs2":"react","amd":"react","root":"React"} ***!
+          \**************************************************************************************/
+
+/*!**************************************************************************************!*\
+          !*** external {"root":"React","commonjs2":"react","commonjs":"react","amd":"react"} ***!
+          \**************************************************************************************/
+
+/**
+ * @license React
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @license React
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * @remix-run/router v1.15.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * React Router DOM v6.22.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * React Router v6.22.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/** @license React v16.13.1
+           * react-is.development.js
+           *
+           * Copyright (c) Facebook, Inc. and its affiliates.
+           *
+           * This source code is licensed under the MIT license found in the
+           * LICENSE file in the root directory of this source tree.
+           */
+
+/** @license React v16.13.1
+     * react-is.production.min.js
+     *
+     * Copyright (c) Facebook, Inc. and its affiliates.
+     *
+     * This source code is licensed under the MIT license found in the
+     * LICENSE file in the root directory of this source tree.
+     */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
