@@ -453,7 +453,6 @@ export const UniversitiesFilterBtn = styled.button`
   justify-content: center;
   margin-left: auto;
   align-items: center;
-  z-index: 1000;
 
   & svg {
     margin-left: 5px;
@@ -480,4 +479,5 @@ export const FilterButtonClose = styled.button`
   position: absolute;
   top: 15px;
   right: 15px;
+  z-index: 1000;
 `;
