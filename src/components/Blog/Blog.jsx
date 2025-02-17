@@ -91,7 +91,7 @@ export const Blog = () => {
     console.log(isDeleting);
     try {
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/blogs/${id}/delete`
+        `${process.env.REACT_APP_BACKEND_URL}/blogs/${id}/delete/`
       );
 
       toast.success('Blog delete successfully!');
