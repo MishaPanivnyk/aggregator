@@ -69,7 +69,7 @@ export const UniversityId = () => {
     const fetchUniversity = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/universities/${id}`
+          `${process.env.REACT_APP_BACKEND_URL}/universities/${id}/`
         );
         setUniversity(response.data);
         setLoading(false);
@@ -83,7 +83,7 @@ export const UniversityId = () => {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/universities/${id}/reviews`
+          `${process.env.REACT_APP_BACKEND_URL}/universities/${id}/reviews/`
         );
         setReviews(response.data);
       } catch (error) {
@@ -99,7 +99,7 @@ export const UniversityId = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/users`
+          `${process.env.REACT_APP_BACKEND_URL}/api/users/`
         );
         setUsers(response.data);
       } catch (error) {
@@ -145,7 +145,7 @@ export const UniversityId = () => {
       );
 
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/universities/${id}/reviews`
+        `${process.env.REACT_APP_BACKEND_URL}/universities/${id}/reviews/`
       );
       toast.success('Відгук успішно створено!');
       setReviews(response.data);
