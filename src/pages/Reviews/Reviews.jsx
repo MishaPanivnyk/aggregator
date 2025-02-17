@@ -35,7 +35,7 @@ const Reviews = () => {
   const [loadingUniversity, setLoadingUniversity] = useState(true);
   const [isModerator, setIsModerator] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const reviewsPerPage = 10; 
+  const reviewsPerPage = 10;
 
   const formatDate = isoDate => {
     const date = new Date(isoDate);
@@ -73,7 +73,7 @@ const Reviews = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/profile`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/profile/`,
           {
             headers: {
               Authorization: `token ${token}`,
@@ -98,7 +98,7 @@ const Reviews = () => {
         const universitiesData = await Promise.all(
           reviews.map(review =>
             axios.get(
-              `${process.env.REACT_APP_BACKEND_URL}/universities/${review.university}`
+              `${process.env.REACT_APP_BACKEND_URL}/universities/${review.university}/`
             )
           )
         );
@@ -114,7 +114,7 @@ const Reviews = () => {
   const deleteReview = async reviewId => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/review/${reviewId}/delete`,
+        `${process.env.REACT_APP_BACKEND_URL}/review/${reviewId}/delete/`,
         {
           headers: {
             Authorization: `token ${token}`,
@@ -128,15 +128,18 @@ const Reviews = () => {
     }
   };
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = pageNumber => {
     setCurrentPage(pageNumber);
   };
 
-  const sortedReviews = [...reviews].reverse(); 
+  const sortedReviews = [...reviews].reverse();
 
   const indexOfLastReview = currentPage * reviewsPerPage;
   const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
-  const currentReviews = sortedReviews.slice(indexOfFirstReview, indexOfLastReview);
+  const currentReviews = sortedReviews.slice(
+    indexOfFirstReview,
+    indexOfLastReview
+  );
   const totalPages = Math.ceil(sortedReviews.length / reviewsPerPage);
 
   const UniversityInfo = ({ universityId }) => {
@@ -212,9 +215,7 @@ const Reviews = () => {
                     active={index + 1 === currentPage}
                     onClick={() => handlePageChange(index + 1)}
                   >
-                    <MDBPaginationLink href="#">
-                      {index + 1}
-                    </MDBPaginationLink>
+                    <MDBPaginationLink href="#">{index + 1}</MDBPaginationLink>
                   </MDBPaginationItem>
                 ))}
               </MDBPagination>
