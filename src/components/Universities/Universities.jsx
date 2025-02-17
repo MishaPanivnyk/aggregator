@@ -94,7 +94,7 @@ export const Universities = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/universities`
+          `${process.env.REACT_APP_BACKEND_URL}/universities/`
         );
         const data = response.data;
 
