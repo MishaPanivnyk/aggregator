@@ -22,7 +22,7 @@ const Blog = () => {
     const fetchBlog = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/blogs/${id}`
+          `${process.env.REACT_APP_BACKEND_URL}/blogs/${id}/`
         );
         setBlog(response.data);
         setLoading(false);
